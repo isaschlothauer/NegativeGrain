@@ -1,0 +1,78 @@
+.landing {
+  position: relative;
+  /* min-height: 100%; */
+
+}
+
+.backgroundImage {
+  /* border: 1px dotted red; */
+  position: absolute;
+  display: flex;
+  width: 100vw;
+  margin: 0 auto;
+  opacity: 0.9;
+  height: calc(100vh - 60px);
+}
+
+.mainPageContainer {
+  position: absolute;
+  z-index: 1;
+  top: 5vh;
+  width: 100%;  
+  margin: 0 auto;
+  left: 50%;
+  transform: translate(-50%)
+}
+
+.noAuthLandingPage {
+  position: absolute;
+  width: 100%;
+  /* top: 10%; */
+  /* left: 0; */
+  color: var(--fontColorDkBg);
+  padding: 0 4%;
+  background-color: rgba(0, 0, 0, 0.6);
+  font-size: 1.1em;
+  z-index: 0;
+}
+
+/* .landingText {
+  text-align: center;
+} */
+
+.userDataInputComponents {
+  border: 1px dotted white;
+  z-index: 1;
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform:translate(-50% )
+}
+
+/* @media only screen and (min-width: 770ox) {
+  .backgroundImage {
+    height: 100%;
+  }
+} */
+
+
+@media only screen and (min-width: 770px) {
+  .mainPageContainer {
+    width: 70%;
+    align-content: center;
+  }
+
+
+  
+}
+
+@media only screen and (min-width: 1200px) {
+  .noAuthLandingPage {
+    padding: 0;
+  }
+
+  .landingText {
+    padding: 0 0.3em;
+  }
+  
+}

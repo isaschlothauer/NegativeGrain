@@ -1,0 +1,180 @@
+.headerContainer {
+  position: relative;
+  /* background-color: rgba(0, 0, 0, 0); */
+  width: 100vw;
+  /* border: 1px dotted red; */
+}
+
+.headerMainSection {
+  display: flex;
+  padding: 0 4%;
+  padding-top: 1em;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.headerTitle {
+  font-size: 0.9em;
+  color: var(--fontColor);
+  text-decoration: none;
+  margin: auto;
+}
+
+.headerText {
+  font-size: 0.9em;
+  display: flex;
+  /* text-align: center; */
+}
+
+.headerMenu {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  width: 100vw;
+  margin: auto;
+}
+
+.loginLInk {
+  display: none;
+}
+
+.loginLinkStyleContainer {
+  display: none;
+  height: 1em;
+}
+
+.dropDownMenu {
+  /* border: 1px dotted green; */
+  width: 100vw;
+  position: absolute;
+  /* height: 90vh; */
+  height: calc(100% - 3%);
+  height: -o-calc(100% - 5%); /* opera */
+  height: -webkit-calc(100% - 5%); /* google, safari */
+  height: -moz-calc(100% - 5%); /* firefox */
+  animation: fadeIn 0.7s;
+  background-color: white;
+  z-index: 10;
+}
+
+.uList {
+  width: 100%;
+  padding-top: 1em;
+}
+
+.listStyles {
+  text-align: center;
+  padding: 0.3em 0;
+  font-size: 1.2em;
+  display: flex;
+  margin: 0 auto;
+  border: none;
+  background: rgba(0, 0, 0, 0);
+}
+
+.listItemSearch {
+  display: flex;
+  margin: 0 auto;
+  height: 1em;
+  padding: 0 0.2em;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
+
+.searchForm {
+  /* width: 10em; */
+  /* display: flex; */
+  /* border: 1px dotted green; */
+  /* margin: 0 auto; */  
+}
+
+.searchFormItem {
+  display: block;
+  width: 100%;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.searchListItem {
+  display: flex;
+  margin: 0 auto; 
+  align-content: center;
+}
+
+.searchFormLabel {
+  display: block;
+}
+
+.formInput {
+  width: 100%;
+  border: none;
+  padding: 0 0.5em;
+  font-size: 0.9em;
+}
+
+
+.linkDec {
+  text-decoration: none;
+  font-size: 0.8em;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5em;
+}
+
+
+
+@keyframes fadeIn {
+  0% { opacity: 0;}
+  100% { opacity: 1; }
+}
+
+@media only screen and (min-width: 770px) {
+  .headerMenu {
+    display: none
+  }
+
+  .headerTitle {
+    margin: 0;
+  }
+
+  .loginLinkStyleContainer {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    width: 100vw;
+    margin: 0 auto;
+    margin-top: -0.14em;
+    gap: 0.6em;
+  }
+
+  .searchInput {
+    display: flex;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
+    line-height: 1em;
+    height: 1em;
+    margin-bottom: 0.2em;
+    width: 5em;
+    font-size: 0.8em;
+    padding: 0 0.3em;
+
+  }
+
+  .loginLInk {
+    display: flex;
+    text-decoration: none;
+    font-size: 1em;
+  }
+
+  .dropDownMenu {
+    display: none;
+  }
+    
+}
+
+@media only screen and (min-width: 1200px) {
+  .headerMainSection {
+    /* padding: 0; */
+  }
+  
+}
