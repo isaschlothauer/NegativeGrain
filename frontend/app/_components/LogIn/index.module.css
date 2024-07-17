@@ -18,7 +18,8 @@
 
 .inputItemList > label {
   width: 3em;
-  color: var(--fontColor)
+  color: var(--fontColor);
+  font-size: 0.9em;
 }
 
 .inputFieldStyle {
@@ -36,6 +37,7 @@
   margin: 0 auto;
   align-self: center;
   margin-bottom: 0.5em;
+  font-size: 0.9em;
 }
 
 .textNewAccount {
@@ -43,6 +45,8 @@
   font-size: 0.9em;
 }
 
-.textNewAccount > * {
-  text-decoration: dotted;
+.textNewAccountLink {
+  text-decoration: none;
+  color: var(--linkColor);
 }
+

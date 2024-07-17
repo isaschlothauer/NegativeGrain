@@ -24,7 +24,7 @@ export default function OfflineLandingPage () {
       <div className={styles.mainPageContainer}>
         <div className={`${styles.noAuthLandingPage} ${chathura.className}`}>
           <p className={styles.landingText}>
-            Discover photographs and photographers through Negative Grain. This is a platform for photographers and photography lovers, providing a distraction free photo sharing and viewing experience. 
+            Discover photographers and photographic work through Negative Grain. This is a platform for photographers and photography lovers, providing a distraction free photo sharing and viewing experience. 
           </p>
           <div className={styles.userDataInputComponents}>
             <Login />

@@ -36,9 +36,9 @@
   z-index: 0;
 }
 
-/* .landingText {
-  text-align: center;
-} */
+.landingText {
+  font-size: 0.9em;
+}
 
 .userDataInputComponents {
   border: 1px dotted white;

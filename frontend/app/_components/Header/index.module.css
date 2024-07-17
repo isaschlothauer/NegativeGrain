@@ -36,6 +36,7 @@
 
 .loginLInk {
   display: none;
+  color: var(--fontColor)
 }
 
 .loginLinkStyleContainer {

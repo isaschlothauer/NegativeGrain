@@ -48,7 +48,7 @@ export default function Header () {
           
           <div className={styles.loginLinkStyleContainer}>
             <input 
-              className={`${styles.searchInput} ${chathura.className}`} 
+              className={`${styles.searchInput}`} 
               placeholder="Search... " 
               onChange={(e) => {setSearchValule(e.target.value)}} 
             />
@@ -57,7 +57,7 @@ export default function Header () {
               return (
                 <Link key={element.id}
                   href={element.destination} 
-                  className={`${styles.loginLInk} ${chathura.className}`}
+                  className={`${styles.loginLInk}`}
                 > 
                   {element.item}
                 </Link>
@@ -67,7 +67,7 @@ export default function Header () {
               return (
                 <Link key={element.id}
                   href={element.destination} 
-                  className={`${styles.loginLInk} ${chathura.className}`}
+                  className={`${styles.loginLInk}`}
                 > 
                   {element.item}
                 </Link>
@@ -84,7 +84,7 @@ export default function Header () {
         <ul className={styles.uList}>
           <li className={`${styles.listItemSearchContainer}`}>
             <input 
-              className={`${styles.listItemSearch} ${chathura.className} `} 
+              className={`${styles.listItemSearch} `} 
               placeholder="Search... " 
               onChange={(e) => {setSearchValule(e.target.value)}} 
             />
@@ -94,7 +94,7 @@ export default function Header () {
             <li key={element.id}>
               <button 
                 onClick={toggle}
-                className={`${styles.listStyles} ${chathura.className}`}
+                className={`${styles.listStyles}`}
               >
                 {element.item}
               </button>
@@ -105,7 +105,7 @@ export default function Header () {
             <li key={element.id}>
               <button 
                 onClick={toggle}
-                className={`${styles.listStyles} ${chathura.className}`}
+                className={`${styles.listStyles}`}
               >
                 {element.item}
               </button>
