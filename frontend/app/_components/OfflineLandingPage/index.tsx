@@ -1,13 +1,10 @@
 import styles from './index.module.css'
-import BackgroundImage from '../BackgroundImage'
 import { chathura } from '@/app/layout'
 import Login from '../LogIn';
-import landingBackground from '../../../public/_D753897_resize.jpg'
+import landingBackground from '../../../public/images/_D753897_resize.jpg'
 import Image from 'next/image'
 
 export default function OfflineLandingPage () {
-
-
   return (
     <div className={styles.landing}>
       <Image 

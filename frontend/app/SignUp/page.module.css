@@ -1,0 +1,73 @@
+.signUp {
+  position: relative;
+}
+
+.backgroundImage {
+  position: absolute;
+  display: flex;
+  width: 100vw;
+  margin: 0 auto;
+  opacity: 0.9;
+  height: calc(100vh - 60px);
+}
+
+.pageContainer {
+  z-index: 1;
+  position: absolute;
+  /* top: 200%; */
+  left: 50vw;
+  margin-top: 10%;
+  transform:translate(-50% )
+}
+
+.noAuthLandingPage {
+  position: absolute;
+  width: 100%;
+  color: var(--fontColorDkBg);
+  padding: 0 4%;
+  background-color: var(--bgColor);
+  font-size: 1.1em;
+  z-index: 0;
+}
+
+.signInWindowTitle {
+  font-size: 0.9em;
+}
+
+.userDataInputComponents {
+  z-index: 1;
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform:translate(-50% )
+}
+
+/* @media only screen and (min-width: 770ox) {
+  .backgroundImage {
+    height: 100%;
+  }
+} */
+
+
+@media only screen and (min-width: 770px) {
+  .mainPageContainer {
+    width: 70%;
+    align-content: center;
+  }
+
+  .userDataInputComponents {
+    top: 160%;
+  }
+
+  
+}
+
+@media only screen and (min-width: 1200px) {
+  .noAuthLandingPage {
+    padding: 0;
+  }
+
+  .landingText {
+    padding: 0 0.3em;
+  }
+}

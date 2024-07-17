@@ -27,8 +27,6 @@
 .noAuthLandingPage {
   position: absolute;
   width: 100%;
-  /* top: 10%; */
-  /* left: 0; */
   color: var(--fontColorDkBg);
   padding: 0 4%;
   background-color: rgba(0, 0, 0, 0.6);
@@ -41,7 +39,6 @@
 }
 
 .userDataInputComponents {
-  border: 1px dotted white;
   z-index: 1;
   position: absolute;
   top: 120%;
@@ -62,6 +59,9 @@
     align-content: center;
   }
 
+  .userDataInputComponents {
+    top: 160%;
+  }
 
   
 }
@@ -74,5 +74,4 @@
   .landingText {
     padding: 0 0.3em;
   }
-  
 }

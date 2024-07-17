@@ -27,7 +27,7 @@ export default function Login () {
         >
           Log in
         </button>
-        <p className={styles.textNewAccount}>No account? Create one <Link href="/" className={styles.textNewAccountLink}>here</Link></p>
+        <p className={styles.textNewAccount}>No account? Create one <Link href="/SignUp" className={styles.textNewAccountLink}>here</Link></p>
       </form>
     </>
   )
