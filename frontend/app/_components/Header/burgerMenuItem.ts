@@ -1,4 +1,4 @@
-interface NavMenuProps {
+export interface NavMenuProps {
   id: number;
   item: string;
   destination: string;
@@ -14,6 +14,11 @@ export const burgerMenuItems: NavMenuProps[] = [
     id: 2,
     item: 'Sign Up',
     destination: '/SignUp'
+  },
+  {
+    id: 3,
+    item: 'Cancel',
+    destination: ''
   },
 ]
 
@@ -37,5 +42,10 @@ export const burgerMenuItemsLoggedIn = [
     id: 4,
     item: 'Log Off',
     destination: '/'
+  },
+  {
+    id: 5,
+    item: 'Cancel',
+    destination: ''
   },
 ]

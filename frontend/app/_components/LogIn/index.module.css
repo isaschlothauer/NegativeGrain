@@ -9,6 +9,10 @@
 
 }
 
+.startBrowsing {
+  color: var(--fontColor)
+}
+
 .loginItemList {
   list-style-type: none;
   padding: 1em;

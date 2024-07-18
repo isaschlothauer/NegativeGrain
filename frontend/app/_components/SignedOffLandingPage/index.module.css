@@ -1,11 +1,8 @@
-.landing {
+.signUp {
   position: relative;
-  /* min-height: 100%; */
-
 }
 
 .backgroundImage {
-  /* border: 1px dotted red; */
   position: absolute;
   display: flex;
   width: 100vw;
@@ -14,27 +11,45 @@
   height: calc(100vh - 60px);
 }
 
-.mainPageContainer {
-  position: absolute;
+.pageContainer {
   z-index: 1;
-  top: 5vh;
-  width: 100%;  
-  margin: 0 auto;
-  left: 50%;
-  transform: translate(-50%)
+  position: absolute;
+  margin-top: 10%;
+  width: 100%;
 }
 
+.mainSection {
+  display: flex;
+  margin: 0 auto;
+  max-width: 1200px;
+  background-color: var(--darkBg);
+
+  /* align-items: center;
+  justify-content: center;
+  border: 1px dotted green; */
+
+}
+
+.landingText {
+  max-width: 1200px;
+  padding: 0 1em;
+  /* margin: 0 auto; */
+  /* padding: 0 1em; */
+  color: var(--fontColorDkBg);
+  /* background-color: var(--fontColorDkBg) */
+}
+/* 
 .noAuthLandingPage {
   position: absolute;
   width: 100%;
   color: var(--fontColorDkBg);
   padding: 0 4%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--bgColor);
   font-size: 1.1em;
   z-index: 0;
 }
 
-.landingText {
+.signInWindowTitle {
   font-size: 0.9em;
 }
 
@@ -44,7 +59,7 @@
   top: 120%;
   left: 50%;
   transform:translate(-50% )
-}
+} */
 
 /* @media only screen and (min-width: 770ox) {
   .backgroundImage {
@@ -53,25 +68,25 @@
 } */
 
 
-@media only screen and (min-width: 770px) {
-  .mainPageContainer {
+/* @media only screen and (min-width: 770px) { */
+  /* .mainPageContainer {
     width: 70%;
     align-content: center;
   }
 
   .userDataInputComponents {
     top: 160%;
-  }
+  } */
 
   
-}
+/* } */
 
-@media only screen and (min-width: 1200px) {
-  .noAuthLandingPage {
+/* @media only screen and (min-width: 1200px) { */
+  /* .noAuthLandingPage {
     padding: 0;
   }
 
   .landingText {
     padding: 0 0.3em;
-  }
-}
+  } */
+/* } */

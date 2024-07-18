@@ -1,8 +1,6 @@
 .headerContainer {
   position: relative;
-  /* background-color: rgba(0, 0, 0, 0); */
   width: 100vw;
-  /* border: 1px dotted red; */
 }
 
 .headerMainSection {
@@ -34,14 +32,14 @@
   margin: auto;
 }
 
-.loginLInk {
-  display: none;
-  color: var(--fontColor)
+.dropDownMenuItem {
+  color: var(--fontColor);
 }
 
 .loginLinkStyleContainer {
   display: none;
   height: 1em;
+  list-style-type: none;
 }
 
 .dropDownMenu {
@@ -49,28 +47,21 @@
   width: 100vw;
   position: absolute;
   /* height: 90vh; */
-  height: calc(100% - 3%);
-  height: -o-calc(100% - 5%); /* opera */
-  height: -webkit-calc(100% - 5%); /* google, safari */
-  height: -moz-calc(100% - 5%); /* firefox */
+  height: calc(100% - 60px);
+  height: -o-calc(100% - 60px); /* opera */
+  height: -webkit-calc(100% - 60px); /* google, safari */
+  height: -moz-calc(100% - 60px); /* firefox */
   animation: fadeIn 0.7s;
   background-color: white;
   z-index: 10;
 }
 
 .uList {
-  width: 100%;
-  padding-top: 1em;
+  width: 100%;  
 }
 
-.listStyles {
-  text-align: center;
-  padding: 0.3em 0;
-  font-size: 1.2em;
-  display: flex;
-  margin: 0 auto;
-  border: none;
-  background: rgba(0, 0, 0, 0);
+.uList > li {
+  margin: 0.5em 0;
 }
 
 .listItemSearch {
@@ -82,11 +73,8 @@
   border-bottom: 1px solid rgba(0, 0, 0, 1);
 }
 
-.searchForm {
-  /* width: 10em; */
-  /* display: flex; */
-  /* border: 1px dotted green; */
-  /* margin: 0 auto; */  
+.listItem {
+  text-align: center;
 }
 
 .searchFormItem {
@@ -113,17 +101,6 @@
   font-size: 0.9em;
 }
 
-
-.linkDec {
-  text-decoration: none;
-  font-size: 0.8em;
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 0.5em;
-}
-
-
-
 @keyframes fadeIn {
   0% { opacity: 0;}
   100% { opacity: 1; }
@@ -138,14 +115,18 @@
     margin: 0;
   }
 
-  .loginLinkStyleContainer {
+  .navList {
     flex: 1;
+  }
+
+  .loginLinkStyleContainer {
     display: flex;
     justify-content: flex-end;
-    width: 100vw;
+    width: 100%;
     margin: 0 auto;
     margin-top: -0.14em;
     gap: 0.6em;
+    border: 1px dotted red;
   }
 
   .searchInput {

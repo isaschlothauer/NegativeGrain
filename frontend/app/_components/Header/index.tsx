@@ -1,7 +1,6 @@
 'use client'
 import { useState, useContext, useEffect } from 'react';
 import styles from './index.module.css'
-// import { chathura, unica_one } from '../../layout'
 
 import { Menu } from '@mantine/core';
 
@@ -13,21 +12,31 @@ import { Burger } from '@mantine/core';
 
 import { burgerMenuItems, burgerMenuItemsLoggedIn } from './burgerMenuItem';
 import { unica_one } from '@/app/layout';
-import { chathura } from '@/app/layout';
 
-
+import { NavMenuProps } from '../Header/burgerMenuItem'
 // TODO
 // * Search api routing
 // * Log in
 // * log off
 
-
-
 export default function Header () {
   const { isUserLoggedIn } = useContext(UserDataContext)
   const [opened, { toggle }] = useDisclosure();
-  
+  const [ menuSelector, setMenuSelector ] = useState<NavMenuProps[]>(burgerMenuItems)
   const [ searchValue, setSearchValule ] = useState<string>("");
+
+  useEffect(() => {
+
+    // Menu item loader
+    if (!isUserLoggedIn)
+      setMenuSelector(burgerMenuItems)
+    else
+      setMenuSelector(burgerMenuItemsLoggedIn)
+  })
+
+  useEffect(() => {
+    console.log(searchValue);
+  })
 
   return (
     <>
@@ -45,74 +54,66 @@ export default function Header () {
               </Menu.Target>
             </Menu>
           </div>
-          
-          <div className={styles.loginLinkStyleContainer}>
-            <input 
-              className={`${styles.searchInput}`} 
-              placeholder="Search... " 
-              onChange={(e) => {setSearchValule(e.target.value)}} 
-            />
-            {!isUserLoggedIn? 
-            burgerMenuItems.map((element) => {
-              return (
-                <Link key={element.id}
-                  href={element.destination} 
-                  className={`${styles.loginLInk}`}
-                > 
-                  {element.item}
-                </Link>
-              )
-            })
-            : burgerMenuItemsLoggedIn.map((element) => {
-              return (
-                <Link key={element.id}
-                  href={element.destination} 
-                  className={`${styles.loginLInk}`}
-                > 
-                  {element.item}
-                </Link>
-              )
-            })}
-          </div>
+        
+          {/* Navigation bar */}
+          <nav className={styles.navList}>
+            <ul className={styles.loginLinkStyleContainer}>
+              <li key={0}>
+                <input 
+                  className={`${styles.searchInput}`} 
+                  placeholder="Search... " 
+                  onChange={(e) => {setSearchValule(e.target.value)}} 
+                />
+              </li>
+              
+              {menuSelector.map((element) => {
+                return (
+                  <li key={element.id}>
+                    <Link key={element.id}
+                      href={element.destination} 
+                      className={`${styles.loginLInk}`}
+                      style={{ textDecoration: 'none'}}
+                    > 
+                      {element.item}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </nav>
         </div>
       </div>
 
-      {/* dropdown menu */}
+      {/* dropdown navigation items */}
       {opened 
       && 
       <div className={styles.dropDownMenu}>
-        <ul className={styles.uList}>
-          <li className={`${styles.listItemSearchContainer}`}>
-            <input 
-              className={`${styles.listItemSearch} `} 
-              placeholder="Search... " 
-              onChange={(e) => {setSearchValule(e.target.value)}} 
-            />
-          </li>
-          {!isUserLoggedIn? 
-            burgerMenuItems.map((element) => (
-            <li key={element.id}>
-              <button 
-                onClick={toggle}
-                className={`${styles.listStyles}`}
-              >
-                {element.item}
-              </button>
+        <nav>
+          <ul className={styles.uList}>
+            {/* Search menu */}
+            <li key={0}>
+              <input 
+                className={`${styles.listItemSearch} `} 
+                placeholder="Search... " 
+                onChange={(e) => {setSearchValule(e.target.value)}} 
+              />
             </li>
-          ))
-          :
-          burgerMenuItemsLoggedIn.map((element) => (
-            <li key={element.id}>
-              <button 
-                onClick={toggle}
-                className={`${styles.listStyles}`}
-              >
-                {element.item}
-              </button>
-            </li>
-          ))
-          }
-        </ul>
+            {/* Rest of drop down menu */}
+            {menuSelector.map((element) => {
+                return (
+                  <li key={element.id} className={styles.listItem}>
+                    <Link href={element.destination} 
+                      style={{ textDecoration: 'none'}}
+                      className={styles.dropDownMenuItem}
+                      onClick={toggle}>
+                      {element.item}
+                    </Link>
+                  </li>
+                  )
+                })
+            }
+          </ul>
+        </nav>
       </div>}
     </>
   )
