@@ -14,6 +14,9 @@ import { burgerMenuItems, burgerMenuItemsLoggedIn } from './burgerMenuItem';
 import { unica_one } from '@/app/layout';
 
 import { NavMenuProps } from '../Header/burgerMenuItem'
+import Image from 'next/image'
+import SearchIcon from '../../../public/icons/bx-search.svg'
+
 // TODO
 // * Search api routing
 // * Log in
@@ -21,9 +24,9 @@ import { NavMenuProps } from '../Header/burgerMenuItem'
 
 export default function Header () {
   const { isUserLoggedIn } = useContext(UserDataContext)
-  const [opened, { toggle }] = useDisclosure();
+  const [opened, { toggle }] = useDisclosure(true);
   const [ menuSelector, setMenuSelector ] = useState<NavMenuProps[]>(burgerMenuItems)
-  const [ searchValue, setSearchValule ] = useState<string>("");
+  const [ searchValue, setSearchValue ] = useState<string>("");
 
   useEffect(() => {
 
@@ -58,17 +61,43 @@ export default function Header () {
           {/* Navigation bar */}
           <nav className={styles.navList}>
             <ul className={styles.loginLinkStyleContainer}>
-              <li key={0}>
-                <input 
-                  className={`${styles.searchInput}`} 
-                  placeholder="Search... " 
-                  onChange={(e) => {setSearchValule(e.target.value)}} 
-                />
+              <li key={0} className={styles.NavListWithSearchClear}>
+                <form className={styles.searchForm}>
+                  <input 
+                    className={`${styles.searchInput}`} 
+                    placeholder="Search... " 
+                    onChange={(e) => {setSearchValue(e.target.value)}} 
+                    type='search'
+                    value={searchValue}
+                  />
+                  <button 
+                    type='button'
+                    className={`${styles.clearButton} ${styles.buttonAdjust}`}
+                    onClick={() => setSearchValue('')}
+                    >
+                    Clear
+                  </button>
+                  <button
+                    type='submit'
+                    className={styles.searchButton}
+                  >
+                    <Image 
+                      src={SearchIcon}
+                      width={20}
+                      height={20}
+                      alt='Search icon'
+                      className={styles.searchButtonNavMenu}
+                    />
+                  </button>
+                </form>
               </li>
               
-              {menuSelector.map((element) => {
-                return (
-                  <li key={element.id}>
+              {menuSelector
+                .filter(element => element.id != 3)
+                .map((element) => {
+                if (element.id != 3) {
+                  return (
+                    <li key={element.id}>
                     <Link key={element.id}
                       href={element.destination} 
                       className={`${styles.loginLInk}`}
@@ -77,7 +106,8 @@ export default function Header () {
                       {element.item}
                     </Link>
                   </li>
-                )
+                  )
+                }
               })}
             </ul>
           </nav>
@@ -91,11 +121,28 @@ export default function Header () {
         <nav>
           <ul className={styles.uList}>
             {/* Search menu */}
-            <li key={0}>
+            <li key={0} className={`${styles.NavListWithSearchClear} ${styles.listWithSearchClear}`}>
               <input 
                 className={`${styles.listItemSearch} `} 
                 placeholder="Search... " 
-                onChange={(e) => {setSearchValule(e.target.value)}} 
+                onChange={(e) => {setSearchValue(e.target.value)}} 
+                type='search'
+                value={searchValue}
+                
+              />
+              <button 
+                type='button'
+                className={styles.clearButton}
+                onClick={() => setSearchValue('')}
+                >
+                  Clear
+              </button>
+              <Image 
+                src={SearchIcon}
+                width={20}
+                height={20}
+                alt='Search icon'
+                className={`${styles.searchButtonNavMenu} ${styles.searchButtonDropDown}`}
               />
             </li>
             {/* Rest of drop down menu */}

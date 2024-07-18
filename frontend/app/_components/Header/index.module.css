@@ -7,7 +7,7 @@
   display: flex;
   padding: 0 4%;
   padding-top: 1em;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
 }
 
@@ -21,7 +21,6 @@
 .headerText {
   font-size: 0.9em;
   display: flex;
-  /* text-align: center; */
 }
 
 .headerMenu {
@@ -65,8 +64,7 @@
 }
 
 .listItemSearch {
-  display: flex;
-  margin: 0 auto;
+
   height: 1em;
   padding: 0 0.2em;
   border: 0;
@@ -77,29 +75,62 @@
   text-align: center;
 }
 
-.searchFormItem {
-  display: block;
+.NavListWithSearchClear {
   width: 100%;
-  width: 80%;
-  margin: 0 auto;
-}
-
-.searchListItem {
   display: flex;
-  margin: 0 auto; 
-  align-content: center;
+  justify-content: end;
 }
 
-.searchFormLabel {
-  display: block;
-}
-
-.formInput {
+.listWithSearchClear {
   width: 100%;
-  border: none;
-  padding: 0 0.5em;
-  font-size: 0.9em;
+  justify-content: center;
 }
+
+.searchForm {
+  display: flex;
+}
+
+.clearButton {
+  height: 0.6em;
+  width: 0.6em;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0.3;
+  margin-left: -1em;
+  margin-top: 0.4em;
+  font-size: 0.8em;
+}
+
+.buttonAdjust {
+  margin-top: 0.3em;
+}
+
+.searchButton {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.searchButtonNavMenu {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  height: 0.9em;
+  opacity: 0.5;
+  margin-left: 0.4em;
+}
+
+.searchButtonDropDown {
+  margin-left: 0.3em;
+  margin-top: 0.2em;
+  opacity: 0.5
+}
+
+.loginLInk {
+  width: 2em;
+}
+
 
 @keyframes fadeIn {
   0% { opacity: 0;}
@@ -126,18 +157,14 @@
     margin: 0 auto;
     margin-top: -0.14em;
     gap: 0.6em;
-    border: 1px dotted red;
   }
 
   .searchInput {
     display: flex;
     border: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 1);
-    line-height: 1em;
-    height: 1em;
-    margin-bottom: 0.2em;
-    width: 5em;
-    font-size: 0.8em;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    height: 0.9em;
+    width: 8em;
     padding: 0 0.3em;
 
   }
