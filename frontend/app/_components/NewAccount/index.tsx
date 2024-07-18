@@ -11,6 +11,14 @@ interface NewAccountProps {
   submissionHandler: () => void
 }
 
+interface InputFieldDataProps {
+  data: string;
+  placeholder: string;
+  registrationInputFieldItem: string;
+  required: boolean;
+  type: string
+}
+
 // TODO
 // Backend routing
 
@@ -26,27 +34,47 @@ export default function NewAccount ({ newUserData, setNewUserData, submissionHan
       [name]: value
     }));
   }
+
+  // Clear input fields
+  const clearInputFIelds = (listData: InputFieldDataProps) => {
+    const { data } = listData;
+
+    setNewUserData((prevState) => ({
+      ...prevState,
+      [data]: ''
+    }))
+  }
   
   return (
     <>
       <form className={styles.loginContainer} onSubmit={submissionHandler}>
         <p>Account registration</p>
-        <ul className={styles.regItemList}>
         <p><span className={styles.requiredMark}>*</span> Required data</p>
 
+        <ul className={styles.regItemList}>
           {RegistrationListItems.map((element) => {
             return (
-              <li key={element.id} className={`${styles.inputItemList} ${chathura.className}`}>
-                <label htmlFor={element.data}>{element.registrationInputFieldItem} {element.required && <span className={styles.requiredMark}>*</span>}</label>
-                <input 
-                  className={`${styles.inputFieldStyle}`}
-                  placeholder={element.placeholder}
-                  type={element.type}
-                  name={element.data}
-                  id={element.data}
-                  value={newUserData[element.data as keyof newUserRDataProps]}
-                  onChange={handleInputChange}
-                />
+              <li key={element.id} className={`${chathura.className}`}>
+                <div className={`${styles.inputItemList}`}>
+                  <label htmlFor={element.data}>{element.registrationInputFieldItem} {element.required && <span className={styles.requiredMark}>*</span>}</label>
+                  <input 
+                    className={`${styles.inputFieldStyle}`}
+                    placeholder={element.placeholder}
+                    type={element.type}
+                    name={element.data}
+                    id={element.data}
+                    value={newUserData[element.data as keyof newUserRDataProps]}
+                    onChange={handleInputChange}
+                  />
+                  <button 
+                    type='button'
+                    className={styles.clearButton}
+                    // onClick={(prevState) => setNewUserData({...prevState, [name]})}
+                    onClick={() => clearInputFIelds(element)}
+                    >
+                      Clear
+                  </button>
+                </div>
               </li>
             )
           })}

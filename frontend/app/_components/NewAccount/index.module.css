@@ -1,6 +1,7 @@
 .loginContainer {
   background-color: var(--bgColor);
-  width: 100%;
+  max-width: 15em;
+  margin: 0 auto;
   border-radius: 0.2em;
   display: flex;
   flex-direction: column;
@@ -16,6 +17,7 @@
 
 .inputItemList {
   margin: 0.5em 0;
+  display: flex;
 }
 
 .inputItemList > * {
@@ -60,3 +62,17 @@
   color: var(--fontColor);
 }
 
+
+.clearButton {
+  height: 0.6em;
+  width: 0.6em;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0.3;
+  margin-left: -1em;
+  margin-top: 0.4em;
+  font-size: 0.8em;
+}

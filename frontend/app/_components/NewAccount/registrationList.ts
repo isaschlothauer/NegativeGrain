@@ -48,4 +48,12 @@ export const RegistrationListItems: RegistrationListItemsList[] = [
     type: 'password',
     required: true,
   },
+  {
+    id: 5,
+    registrationInputFieldItem: 'Confirm',
+    placeholder: '', 
+    data: 'cPassword',
+    type: 'password',
+    required: true,
+  },
 ]

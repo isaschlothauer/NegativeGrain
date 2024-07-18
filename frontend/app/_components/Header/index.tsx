@@ -24,7 +24,7 @@ import SearchIcon from '../../../public/icons/bx-search.svg'
 
 export default function Header () {
   const { isUserLoggedIn } = useContext(UserDataContext)
-  const [opened, { toggle }] = useDisclosure(true);
+  const [opened, { toggle }] = useDisclosure();
   const [ menuSelector, setMenuSelector ] = useState<NavMenuProps[]>(burgerMenuItems)
   const [ searchValue, setSearchValue ] = useState<string>("");
 
@@ -35,10 +35,6 @@ export default function Header () {
       setMenuSelector(burgerMenuItems)
     else
       setMenuSelector(burgerMenuItemsLoggedIn)
-  })
-
-  useEffect(() => {
-    console.log(searchValue);
   })
 
   return (
@@ -67,7 +63,7 @@ export default function Header () {
                     className={`${styles.searchInput}`} 
                     placeholder="Search... " 
                     onChange={(e) => {setSearchValue(e.target.value)}} 
-                    type='search'
+                    type='text'
                     value={searchValue}
                   />
                   <button 
@@ -126,7 +122,7 @@ export default function Header () {
                 className={`${styles.listItemSearch} `} 
                 placeholder="Search... " 
                 onChange={(e) => {setSearchValue(e.target.value)}} 
-                type='search'
+                type='text'
                 value={searchValue}
                 
               />

@@ -1,7 +1,7 @@
 :root {
   --max-width: 1100px;
   --bgColor: rgb(248, 248, 248);
-  --darkBg: rgba(0, 0, 0, 0.137);
+  --darkBg: rgba(0, 0, 0, 0.5);
   --fontColor: rgb(46, 46, 46);
   --fontColorDkBg: rgb(248, 248, 248);
   --linkColor:rgb(255, 0, 0);
