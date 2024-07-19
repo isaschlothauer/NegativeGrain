@@ -6,6 +6,8 @@ import '@mantine/core/styles.css';
 import { ColorSchemeScript, MantineProvider, rem } from '@mantine/core';
 
 import Header from './_components/Header'
+import { Suspense } from "react";
+
 
 // const chathura = Chathura({ subsets: ["latin"] });
 export const chathura = Chathura({ subsets: ["latin"],  weight: '400' });

@@ -1,5 +1,10 @@
 .signUp {
   position: relative;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .backgroundImage {
@@ -16,39 +21,10 @@
   position: absolute;
   /* top: 200%; */
   left: 50vw;
-  margin-top: 10%;
+  
   transform:translate(-50% );
   width: 100vw;
 }
-/* 
-.noAuthLandingPage {
-  position: absolute;
-  width: 100%;
-  color: var(--fontColorDkBg);
-  padding: 0 4%;
-  background-color: var(--bgColor);
-  font-size: 1.1em;
-  z-index: 0;
-}
-
-.signInWindowTitle {
-  font-size: 0.9em;
-}
-
-.userDataInputComponents {
-  z-index: 1;
-  position: absolute;
-  top: 120%;
-  left: 50%;
-  transform:translate(-50% )
-} */
-
-/* @media only screen and (min-width: 770ox) {
-  .backgroundImage {
-    height: 100%;
-  }
-} */
-
 
 @media only screen and (min-width: 770px) {
   .mainPageContainer {
@@ -59,8 +35,6 @@
   .userDataInputComponents {
     top: 160%;
   }
-
-  
 }
 
 @media only screen and (min-width: 1200px) {

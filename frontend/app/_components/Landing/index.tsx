@@ -3,7 +3,7 @@ import landingBackground from '../../../public/images/_D753897_resize.jpg'
 import Image from 'next/image'
 import Link from 'next/link';
 
-export default function SignedOffLandingPage () {
+export default function Landing () {
   return (
     <div className={styles.signUp}>
       <Image 
@@ -24,19 +24,19 @@ export default function SignedOffLandingPage () {
           </p>
         </div>
 
-        <button 
-          type='button'
-          className={styles.startButton}
-        >
-          Get started
-        </button>
+        <Link 
+            href="/login"
+            className={styles.linkStyle}
+          >
+            Get Started
+        </Link>
         
         <div className={styles.linkContainer}>
           <Link 
-            href="/SignUp"
+            href="/signup"
             className={styles.linkStyle}
           >
-            Create an account
+            New account
           </Link>
         </div>
       </div>

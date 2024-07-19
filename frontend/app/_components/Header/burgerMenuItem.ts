@@ -8,12 +8,12 @@ export const burgerMenuItems: NavMenuProps[] = [
   {
     id: 1,
     item: 'Log in',
-    destination: '/'
+    destination: '/login'
   },
   {
     id: 2,
     item: 'Sign Up',
-    destination: '/SignUp'
+    destination: '/signup'
   },
   {
     id: 3,

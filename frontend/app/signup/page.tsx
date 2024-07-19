@@ -3,7 +3,9 @@ import { useState, useEffect } from 'react';
 import styles from './page.module.css'
 import SignInBackGround from '../../public/images/_D753943-resize.jpg'
 import Image from 'next/image'
-import NewAccount from '../_components/NewAccount'
+import dynamic from 'next/dynamic'
+
+const AccountRegistration = dynamic(() => import ('../_components/AccountRegistration'))
 
 export interface newUserRDataProps {
   userName: string,
@@ -43,7 +45,7 @@ export default function SignUp () {
       />
 
       <div className={styles.pageContainer}>
-        <NewAccount 
+        <AccountRegistration 
           newUserData={newUserData}
           setNewUserData={setNewUserData}
           submissionHandler={submissionHandler}

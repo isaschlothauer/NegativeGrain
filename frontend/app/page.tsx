@@ -6,15 +6,10 @@ import { chathura } from "./layout";
 import dynamic from 'next/dynamic'
 
 const Main = dynamic(() => import ('./_components/Main'));
-const SignedOffLandingPage = dynamic(() => import ('./_components/SignedOffLandingPage'));
-
+const Landing = dynamic(() => import ('./_components/Landing'));
 
 export default function Home() {
   const { isUserLoggedIn } = useContext(UserDataContext)
-
-  console.log(isUserLoggedIn)
-
-
   
   const componentSelector = () => {
     if (isUserLoggedIn == undefined || isUserLoggedIn == null)
@@ -22,7 +17,7 @@ export default function Home() {
     else if (isUserLoggedIn)
       return <Main />
     else 
-      return <SignedOffLandingPage />;
+      return <Landing />;
   }
 
   return (

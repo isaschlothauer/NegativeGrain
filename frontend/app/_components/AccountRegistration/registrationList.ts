@@ -11,7 +11,7 @@ export const RegistrationListItems: RegistrationListItemsList[] = [
   {
     id: 0,
     registrationInputFieldItem: 'User Name',
-    placeholder: 'TofuGraph', 
+    placeholder: '', 
     data: 'userName',
     type: 'text',
     required: true,
@@ -19,7 +19,7 @@ export const RegistrationListItems: RegistrationListItemsList[] = [
   {
     id: 1,
     registrationInputFieldItem: 'First Name',
-    placeholder: 'Foto', 
+    placeholder: '', 
     data: 'firstName',
     type: 'text',
     required: false,
@@ -27,7 +27,7 @@ export const RegistrationListItems: RegistrationListItemsList[] = [
   {
     id: 2,
     registrationInputFieldItem: 'Last Name',
-    placeholder: 'Graph', 
+    placeholder: '', 
     data: 'lastName',
     type: 'text',
     required: false,

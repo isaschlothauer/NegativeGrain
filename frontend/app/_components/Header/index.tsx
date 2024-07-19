@@ -1,21 +1,20 @@
 'use client'
 import { useState, useContext, useEffect } from 'react';
 import styles from './index.module.css'
-
 import { Menu } from '@mantine/core';
-
 import { UserDataContext } from '../../context/userContext';
 import Link from 'next/link'
-
 import { useDisclosure } from '@mantine/hooks';
 import { Burger } from '@mantine/core';
-
 import { burgerMenuItems, burgerMenuItemsLoggedIn } from './burgerMenuItem';
 import { unica_one } from '@/app/layout';
-
 import { NavMenuProps } from '../Header/burgerMenuItem'
 import Image from 'next/image'
 import SearchIcon from '../../../public/icons/bx-search.svg'
+import dynamic from 'next/dynamic';
+const ClearButton = dynamic(() => import('../../_components/ClearButton'))
+
+
 
 // TODO
 // * Search api routing
@@ -38,7 +37,7 @@ export default function Header () {
   })
 
   return (
-    <>
+    <header>
       <div className={styles.headerContainer}>
         <div className={styles.headerMainSection}>
           <Link href="/" className={styles.headerTitle}>
@@ -66,13 +65,7 @@ export default function Header () {
                     type='text'
                     value={searchValue}
                   />
-                  <button 
-                    type='button'
-                    className={`${styles.clearButton} ${styles.buttonAdjust}`}
-                    onClick={() => setSearchValue('')}
-                    >
-                    Clear
-                  </button>
+                  <ClearButton setting={styles.clearButton} handleClear={() => setSearchValue('')} />
                   <button
                     type='submit'
                     className={styles.searchButton}
@@ -143,21 +136,21 @@ export default function Header () {
             </li>
             {/* Rest of drop down menu */}
             {menuSelector.map((element) => {
-                return (
-                  <li key={element.id} className={styles.listItem}>
-                    <Link href={element.destination} 
-                      style={{ textDecoration: 'none'}}
-                      className={styles.dropDownMenuItem}
-                      onClick={toggle}>
-                      {element.item}
-                    </Link>
-                  </li>
-                  )
-                })
+              return (
+                <li key={element.id} className={styles.listItem}>
+                  <Link href={element.destination} 
+                    style={{ textDecoration: 'none'}}
+                    className={styles.dropDownMenuItem}
+                    onClick={toggle}>
+                    {element.item}
+                  </Link>
+                </li>
+                )
+              })
             }
           </ul>
         </nav>
       </div>}
-    </>
+    </header>
   )
 }

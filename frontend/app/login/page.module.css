@@ -1,25 +1,45 @@
 .loginContainer {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backgroundImage {
+  position: absolute;
+  display: flex;
+  width: 100vw;
+  margin: 0 auto;
+  opacity: 0.9;
+  height: calc(100vh - 60px);
+}
+
+.loginFormContainer {
+  position: absolute;
   background-color: var(--bgColor);
-  width: 100%;
+  width: 15em;
   border-radius: 0.2em;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-bottom: 1em;
-
+  justify-content: center;
 }
 
-.startBrowsing {
-  color: var(--fontColor)
+.listItem {
+  margin: 0.5em 0;
 }
 
 .loginItemList {
   list-style-type: none;
   padding: 1em;
+  flex-direction: column;
 }
 
-.inputItemList > * {
-  display: block;
+.inputItemList {
+  display: flex;
 }
 
 .inputItemList > label {
@@ -56,3 +76,16 @@
   color: var(--linkColor);
 }
 
+.clearButton {
+  height: 0.6em;
+  width: 0.6em;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0.2;
+  margin-left: -0.8em;
+  margin-top: 0.3em;
+  font-size: 0.8em;
+}

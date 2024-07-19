@@ -2,8 +2,10 @@ import { chathura } from '@/app/layout'
 import styles from './index.module.css'
 import { RegistrationListItems } from './registrationList'
 import Link from 'next/link'
-import { newUserRDataProps } from '../../SignUp/page'
+import { newUserRDataProps } from '../../signup/page'
 import { ChangeEvent, Dispatch, SetStateAction } from 'react'
+import dynamic from 'next/dynamic';
+const ClearButton = dynamic(() => import('../ClearButton'))
 
 interface NewAccountProps {
   newUserData: newUserRDataProps;
@@ -22,9 +24,8 @@ interface InputFieldDataProps {
 // TODO
 // Backend routing
 
-export default function NewAccount ({ newUserData, setNewUserData, submissionHandler }: NewAccountProps) {
+export default function AccountRegistration ({ newUserData, setNewUserData, submissionHandler }: NewAccountProps) {
 
-  
   // Handling parent state update 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement> ) => {
     const { name, value } = e.target;
@@ -36,8 +37,10 @@ export default function NewAccount ({ newUserData, setNewUserData, submissionHan
   }
 
   // Clear input fields
-  const clearInputFIelds = (listData: InputFieldDataProps) => {
-    const { data } = listData;
+  // const clearInputFIelds = (listData: InputFieldDataProps) => {
+const clearInputFIelds = (data: string) => {
+
+    // const { data } = listData;
 
     setNewUserData((prevState) => ({
       ...prevState,
@@ -66,14 +69,7 @@ export default function NewAccount ({ newUserData, setNewUserData, submissionHan
                     value={newUserData[element.data as keyof newUserRDataProps]}
                     onChange={handleInputChange}
                   />
-                  <button 
-                    type='button'
-                    className={styles.clearButton}
-                    // onClick={(prevState) => setNewUserData({...prevState, [name]})}
-                    onClick={() => clearInputFIelds(element)}
-                    >
-                      Clear
-                  </button>
+                  <ClearButton setting={styles.clearButton} handleClear={() => clearInputFIelds(element.data)} />
                 </div>
               </li>
             )
