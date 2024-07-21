@@ -81,7 +81,8 @@ export default function Header () {
                 </form>
               </li>
               
-              {menuSelector
+              {isUserLoggedIn &&
+              menuSelector
                 .filter(element => element.id != 3)
                 .map((element) => {
                 if (element.id != 3) {

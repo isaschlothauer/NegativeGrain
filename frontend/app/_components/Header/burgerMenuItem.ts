@@ -43,9 +43,4 @@ export const burgerMenuItemsLoggedIn = [
     item: 'Log Off',
     destination: '/'
   },
-  {
-    id: 5,
-    item: 'Cancel',
-    destination: ''
-  },
 ]
