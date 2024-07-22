@@ -9,6 +9,10 @@
   padding: 1em 0;
 }
 
+.accountRegstrationTitle {
+  font-size: 1.3em;
+}
+
 .regItemList {
   list-style-type: none;
   padding: 1em;

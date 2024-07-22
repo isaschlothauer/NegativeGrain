@@ -34,8 +34,12 @@
 
 .loginItemList {
   list-style-type: none;
-  padding: 1em;
+  padding: 0em;
   flex-direction: column;
+}
+
+.loginComponentTitle {
+  font-size: 1.3em;
 }
 
 .inputItemList {

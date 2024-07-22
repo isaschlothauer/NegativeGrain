@@ -56,7 +56,7 @@ export default function Login () {
         className={styles.backgroundImage}
       />
       <form className={styles.loginFormContainer} onSubmit={submissionHandler}>
-        
+        <p className={styles.loginComponentTitle}>Sign in</p>
         <ul className={styles.loginItemList}>
           {inputListItems.map((element) => {
             return (

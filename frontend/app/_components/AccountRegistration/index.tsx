@@ -51,7 +51,7 @@ const clearInputFIelds = (data: string) => {
   return (
     <>
       <form className={styles.loginContainer} onSubmit={submissionHandler}>
-        <p>Account registration</p>
+        <p className={styles.accountRegstrationTitle}>Account registration</p>
         <p><span className={styles.requiredMark}>*</span> Required data</p>
 
         <ul className={styles.regItemList}>
