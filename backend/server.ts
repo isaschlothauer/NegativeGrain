@@ -1,13 +1,18 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
+import { corsOptions } from './src/config/cors';
 import { database } from './src/config/database'
+import routes from './src/routes/routes'
 
 dotenv.config();
 
 const app: Express = express();
 
 const B_PORT: number = parseInt(process.env.B_PORT || "5001");
-// const F_PORT: number = parseInt(process.env.F_PORT || "3001");
+app.use( cors(corsOptions) );
+app.use(express.json());
+
 
 // Database connection attempts
 database.getConnection((err, connection) => {
@@ -27,3 +32,6 @@ app.get('/', (req: Request, res: Response) => {
 app.listen(B_PORT, () => {
   console.log(`Server port ${B_PORT}`);
 })
+
+app.use(routes)
+

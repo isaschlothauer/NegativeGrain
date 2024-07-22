@@ -36,12 +36,8 @@ export default function AccountRegistration ({ newUserData, setNewUserData, subm
     }));
   }
 
-  // Clear input fields
-  // const clearInputFIelds = (listData: InputFieldDataProps) => {
+// Clear input fields
 const clearInputFIelds = (data: string) => {
-
-    // const { data } = listData;
-
     setNewUserData((prevState) => ({
       ...prevState,
       [data]: ''
