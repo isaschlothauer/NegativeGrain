@@ -12,13 +12,11 @@ export const newAccountValidation = async (req: Request, res: Response, next: Ne
       "string.max": "Username must be less than 50 characters"
     }),
     firstname: Joi.string()
-    .pattern(new RegExp('^[a-zA-Z0-9]'))
     .max(50)
     .messages({
       "string.max": "Firstname must be less than 50 characters"
     }),
     lastname: Joi.string()
-    .pattern(new RegExp('^[a-zA-Z]'))
     .max(50)
     .messages({
       "string.max": "Lastname must be less than 50 characters"
@@ -27,7 +25,6 @@ export const newAccountValidation = async (req: Request, res: Response, next: Ne
       .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'jp', 'de', 'gov', 'edu']} 
     }),
     password: Joi.string()
-      .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
       .min(5)
       .max(32)
       .required()

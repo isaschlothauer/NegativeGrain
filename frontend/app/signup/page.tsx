@@ -67,6 +67,7 @@ export default function SignUp () {
         }
       )
       
+      console.log(response)
       // Clear input fields
       if (response.data.success === true) {
         setNewUserData({
@@ -102,7 +103,9 @@ export default function SignUp () {
         const errorList = (errorMsg.data.errors).filter((item: string) => item != `"cPassword" must be [ref:password]`)
 
         setValidationResponse(prevState => {
-          return [...prevState, { messages: errorList }];
+          // return [...prevState, { messages: errorList }];
+          const errorMessages = errorList.map((error: string) => ({ messages: error }));
+          return [...prevState, ...errorMessages];
         })
       } 
     }

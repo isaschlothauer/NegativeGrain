@@ -43,6 +43,7 @@
 .regItemList {
   list-style-type: none;
   padding: 1em;
+  padding-bottom: 0.2em;
 }
 
 .inputItemList {
@@ -125,6 +126,7 @@
 
 .errorMsgsUL {
   list-style-type: none;
+  display: block;
 }
 
 .errorMsgList {
