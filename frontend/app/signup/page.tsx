@@ -25,12 +25,12 @@ interface ErrorProps {
 
 export default function SignUp () {
   const [ newUserData, setNewUserData ] = useState<newUserRDataProps>({
-    username: '',
-    firstname: '',
-    lastname: '',
-    email: '',
-    password: '',
-    cPassword: ''
+    username: 'testuser',
+    firstname: 'test',
+    lastname: 'user',
+    email: 'test@user.com',
+    password: 'asdfasdf',
+    cPassword: 'asdfasdf'
   })
 
   // Error message array
@@ -46,9 +46,6 @@ export default function SignUp () {
   
     // String compare
     const passwordMatchVerification = (newUserData.password).localeCompare(newUserData.cPassword);
-
-
-    console.log(passwordMatchVerification)
 
     if (passwordMatchVerification !== 0) {
       setValidationResponse(prevState => {
@@ -71,12 +68,18 @@ export default function SignUp () {
       // Clear input fields
       if (response.data.success === true) {
         setNewUserData({
-          username: '',
-          firstname: '',
-          lastname: '',
-          email: '',
-          password: '',
-          cPassword: ''
+          // username: '',
+          // firstname: '',
+          // lastname: '',
+          // email: '',
+          // password: '',
+          // cPassword: ''
+          username: 'testuser',
+          firstname: 'test',
+          lastname: 'user',
+          email: 'test@user.com',
+          password: 'asdfasdf',
+          cPassword: 'asdfasdf'
         })
       }
 
@@ -91,7 +94,9 @@ export default function SignUp () {
       // Message and redirect delay. 2 sec
       setTimeout(() => {
         setValidationResponse(validationResponse);
-        router.push('/')
+        // RE-ENABLE IT
+        console.log("Enable account creation redirect")
+        // router.push('/')
       }, 2000)
     }
     catch (error: any) {
@@ -128,11 +133,8 @@ export default function SignUp () {
         [data]: ''
       }))
     }
-    
 
-  // console.log(validationResponse)
-
-  const errorTextsHandler = () => {
+  const responseTextRender = () => {
     return (
       <ul className={styles.errorMsgsUL}>
         {validationResponse.map((element, index) => (
@@ -184,7 +186,7 @@ export default function SignUp () {
               )
             })}
           </ul>
-          {errorTextsHandler()}
+          {responseTextRender()}
           <button
             className={styles.submitButton}
             type="submit"

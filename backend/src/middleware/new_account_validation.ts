@@ -35,17 +35,15 @@ export const newAccountValidation = async (req: Request, res: Response, next: Ne
       }),
   
       cPassword: Joi.ref('password')
-      
   })
 
   try {
     const value = await schema.validateAsync(req.body, { abortEarly: false });
 
     // Removing passwordConfirm
-    delete req.body['passwordConfirm'];
-    
-    res.status(200).send({ success: true, message: "validation passed"});
-    // next();
+    delete req.body['cPassword'];
+    // res.status(200).send({ success: true, message: "validation passed"});
+    next();
   } catch (err: any) {
     const errorDetails = await err.details.map((detail: {message: string})  => detail.message)
 
