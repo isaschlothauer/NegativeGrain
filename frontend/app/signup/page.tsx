@@ -3,6 +3,7 @@ import { useState, useEffect, ChangeEvent } from 'react';
 import styles from './page.module.css'
 import SignInBackGround from '../../public/images/_D753943-resize.jpg'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation';
 import { RegistrationListItems } from '../_components/AccountRegistration/registrationList'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
@@ -19,27 +20,41 @@ export interface newUserRDataProps {
 }
 
 interface ErrorProps {
-  message: string;
+  messages: string;
 }
 
 export default function SignUp () {
   const [ newUserData, setNewUserData ] = useState<newUserRDataProps>({
-    username: 'test',
-    firstname: 'firstnametest',
-    lastname: 'lastnametest',
+    username: '',
+    firstname: '',
+    lastname: '',
     email: '',
-    password: 'asdfasdf',
-    cPassword: 'asdfasdf'
+    password: '',
+    cPassword: ''
   })
 
   // Error message array
-  const [ validationFailureMsg, setValidationFailureMsg ] = useState<ErrorProps[]>([])
+  const [ validationResponse, setValidationResponse ] = useState<ErrorProps[]>([])
+  const router = useRouter();
 
-  const submissionHandler = async () => {
+  const submissionHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
     // Clear previous backend error messages
-    setValidationFailureMsg([]);
+    setValidationResponse([]);
 
+  
+    // String compare
+    const passwordMatchVerification = (newUserData.password).localeCompare(newUserData.cPassword);
+
+
+    console.log(passwordMatchVerification)
+
+    if (passwordMatchVerification !== 0) {
+      setValidationResponse(prevState => {
+        return [...prevState, { messages: "Passwords do not match" }];
+      })
+    }
 
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_REGISTER}`, 
@@ -47,23 +62,49 @@ export default function SignUp () {
         {withCredentials: true,
           headers: {
             'Access-Control-Allow-Origin': '*', 
-            'Content-Type': 'application/json', // Ensure the correct Content-Type header
+            'Content-Type': 'application/json', 
           }
         }
       )
       
-      console.log(response)
+      // Clear input fields
+      if (response.data.success === true) {
+        setNewUserData({
+          username: '',
+          firstname: '',
+          lastname: '',
+          email: '',
+          password: '',
+          cPassword: ''
+        })
+      }
 
+      // Clear error texts
+      setValidationResponse([]);
+
+      // Render success message
+      setValidationResponse(prevState => {
+        return [...prevState, { messages: "New account created" }];
+      })
+
+      // Message and redirect delay. 2 sec
+      setTimeout(() => {
+        setValidationResponse(validationResponse);
+        router.push('/')
+      }, 2000)
     }
     catch (error: any) {
-      // console.error(error.response.data.errors);
-      const errorMsg: [] = error.response.data.errors;
+      const errorMsg = error.response;
 
-      // setValidationFailureMsg(errorMsg);
 
-      // errorMsg
-      console.log(errorMsg)
-      
+      if (errorMsg.data.success == false && errorMsg.data.errors !='"cPassword" must be [ref:password]') {
+
+        const errorList = (errorMsg.data.errors).filter((item: string) => item != `"cPassword" must be [ref:password]`)
+
+        setValidationResponse(prevState => {
+          return [...prevState, { messages: errorList }];
+        })
+      } 
     }
   }
 
@@ -73,7 +114,7 @@ export default function SignUp () {
   
       setNewUserData((prevState) => ({
         ...prevState,
-        [name]: value
+        [name]: value.trim()
       }));
     }
   
@@ -86,18 +127,19 @@ export default function SignUp () {
     }
     
 
-  // console.log(validationFailureMsg)
+  // console.log(validationResponse)
 
   const errorTextsHandler = () => {
     return (
       <ul className={styles.errorMsgsUL}>
-        {validationFailureMsg.map((element, index) => (
-          <li key={index} className={styles.errorMsgList}>* {element.message}</li>
+        {validationResponse.map((element, index) => (
+          <li key={index} className={styles.errorMsgList}>* {element.messages}</li>
         ))}
       </ul>
     )
   }
 
+  // console.log(validationResponse)
   return (
     <div className={styles.signUp}>
       <Image 
@@ -131,6 +173,7 @@ export default function SignUp () {
                       id={element.data}
                       value={newUserData[element.data as keyof newUserRDataProps]}
                       onChange={handleInputChange}
+                      required={element.required}
                     />
                     <ClearButton setting={styles.clearButton} handleClear={() => clearInputFIelds(element.data)} />
                   </div>

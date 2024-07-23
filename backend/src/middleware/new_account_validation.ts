@@ -6,7 +6,6 @@ export const newAccountValidation = async (req: Request, res: Response, next: Ne
   // console.log("This is from a middleware:", req.body);
   const schema = Joi.object<NewAccountRegistrationProps>({
     username: Joi.string()
-    .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
     .max(50)
     .required()
     .messages({
@@ -34,7 +33,8 @@ export const newAccountValidation = async (req: Request, res: Response, next: Ne
       .required()
       .messages({
         "string.min": "Password must be minimum 5 characters",
-        "string.max": "Password must be less than 32 characters"
+        "string.max": "Password must be less than 32 characters",
+        "string.ref": "Password do not match"
       }),
   
       cPassword: Joi.ref('password')

@@ -123,6 +123,16 @@
   font-size: 0.8em;
 }
 
+.errorMsgsUL {
+  list-style-type: none;
+}
+
+.errorMsgList {
+  font-size: 0.8em;
+  color: var(--ErrorTextColor);
+  text-align: center;
+}
+
 @media only screen and (min-width: 770px) {
   .mainPageContainer {
     width: 70%;
