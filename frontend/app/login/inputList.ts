@@ -13,7 +13,7 @@ export const inputListItems: InputListItemsProp[] = [
     loginFieldName: 'Account',
     placeholder: '', 
     type: 'text',
-    data: 'userName',
+    data: 'username',
     required: true
   },
   {

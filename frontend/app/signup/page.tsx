@@ -25,12 +25,12 @@ interface ErrorProps {
 
 export default function SignUp () {
   const [ newUserData, setNewUserData ] = useState<newUserRDataProps>({
-    username: 'testuser',
-    firstname: 'test',
-    lastname: 'user',
-    email: 'test@user.com',
-    password: 'asdfasdf',
-    cPassword: 'asdfasdf'
+    username: '',
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+    cPassword: ''
   })
 
   // Error message array
@@ -43,7 +43,6 @@ export default function SignUp () {
     // Clear previous backend error messages
     setValidationResponse([]);
 
-  
     // String compare
     const passwordMatchVerification = (newUserData.password).localeCompare(newUserData.cPassword);
 
@@ -51,6 +50,10 @@ export default function SignUp () {
       setValidationResponse(prevState => {
         return [...prevState, { messages: "Passwords do not match" }];
       })
+
+      setTimeout(() => {
+        setValidationResponse([])
+      }, 3000);
       return;
     }
 
@@ -65,22 +68,15 @@ export default function SignUp () {
         }
       )
       
-      console.log(response)
       // Clear input fields
       if (response.data.success === true) {
         setNewUserData({
-          // username: '',
-          // firstname: '',
-          // lastname: '',
-          // email: '',
-          // password: '',
-          // cPassword: ''
-          username: 'testuser',
-          firstname: 'test',
-          lastname: 'user',
-          email: 'test@user.com',
-          password: 'asdfasdf',
-          cPassword: 'asdfasdf'
+          username: '',
+          firstname: '',
+          lastname: '',
+          email: '',
+          password: '',
+          cPassword: ''
         })
       }
 
@@ -94,10 +90,10 @@ export default function SignUp () {
 
       // Message and redirect delay. 2 sec
       setTimeout(() => {
-        setValidationResponse(validationResponse);
+        setValidationResponse([]); // Clear validation messages
         // RE-ENABLE IT
         console.log("Enable account creation redirect")
-        // router.push('/')
+        router.push('/')
       }, 2000)
     }
     catch (error: any) {
@@ -116,15 +112,15 @@ export default function SignUp () {
     }
   }
 
-    // Handling parent state update 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement> ) => {
-      const { name, value } = e.target;
-  
-      setNewUserData((prevState) => ({
-        ...prevState,
-        [name]: value.trim()
-      }));
-    }
+  // Handling parent state update 
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement> ) => {
+    const { name, value } = e.target;
+
+    setNewUserData((prevState) => ({
+      ...prevState,
+      [name]: value.trim()
+    }));
+  }
   
   // Clear input fields
   const clearInputFIelds = (data: string) => {

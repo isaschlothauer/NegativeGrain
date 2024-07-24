@@ -7,18 +7,25 @@ import Link from 'next/link'
 import Image from 'next/image'
 import LoginBackground from '../../public/images/D75_7907-resize.jpg'
 import dynamic from 'next/dynamic';
+import axios from 'axios';
 const ClearButton = dynamic(() => import('../_components/ClearButton'))
 
 interface loginDataProps {
-  account: string,
+  username: string,
   password: string
+}
+
+interface ErrorProps {
+  messages: string;
 }
 
 export default function Login () {
   const [ loginData, setLoginData ] = useState<loginDataProps>({
-    account: '',
+    username: '',
     password: '',
   })
+  const [ loginResponseMsg, setLoginResponseMsg ] = useState<ErrorProps[]>([])
+
 
   // Input handler
   const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,9 +44,40 @@ export default function Login () {
     }))
   }
 
-  const submissionHandler = () => {
-    console.log("Success!");
-    console.log("Result: ", loginData)
+  const submissionHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Clear previous backend error messages
+    setLoginResponseMsg([])
+
+    try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_LOGIN}`, 
+        loginData,
+        {withCredentials: true,
+          headers: {
+            'Access-Control-Allow-Origin': '*', 
+            'Content-Type': 'application/json', 
+          }
+        }
+      )
+
+      console.log(response);
+      
+      // Clear input fields
+      if (response.data.success === true) {
+        setLoginData({
+          username: '',
+          password: ''
+        })
+      }
+
+      console.log(response);
+    }
+    catch (error) {
+      console.error(error);
+      
+    }
+
   }
 
 
@@ -69,7 +107,7 @@ export default function Login () {
                     type={element.type}
                     name={element.data}
                     id={element.data}
-                    value={loginData[element.data as keyof loginDataProps]}
+                    value={loginData[element.data as keyof loginDataProps] || ''}
                     onChange={inputHandler}
                     required={element.required}
                   />
