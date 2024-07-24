@@ -3,11 +3,16 @@ import { ChangeEvent, ReactHTMLElement, useEffect, useState } from 'react';
 import { chathura } from '@/app/layout'
 import styles from './page.module.css'
 import { inputListItems } from './inputList'
+import { useContext } from 'react';
+import { UserDataContext } from '../context/userContext';
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation';
 import LoginBackground from '../../public/images/D75_7907-resize.jpg'
 import dynamic from 'next/dynamic';
 import axios from 'axios';
+import { useExpirationValidator } from '../hooks/useExpirationValidator'
+
 const ClearButton = dynamic(() => import('../_components/ClearButton'))
 
 interface loginDataProps {
@@ -25,7 +30,17 @@ export default function Login () {
     password: '',
   })
   const [ loginResponseMsg, setLoginResponseMsg ] = useState<ErrorProps[]>([])
+  const { isUserLoggedIn, setIsUserLoggedOn } = useContext(UserDataContext)
 
+
+  const router = useRouter();
+  const authenticationState : any = useExpirationValidator();
+
+  useEffect(() => {
+    if (authenticationState && authenticationState.status === 200) {
+      router.push('/');
+    } 
+  });
 
   // Input handler
   const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -61,8 +76,6 @@ export default function Login () {
         }
       )
 
-      console.log(response);
-      
       // Clear input fields
       if (response.data.success === true) {
         setLoginData({
@@ -71,15 +84,39 @@ export default function Login () {
         })
       }
 
-      console.log(response);
+      console.log(response.data.messages);
+
+      // Clear response mesasge
+      setLoginResponseMsg([])
+
+      // Render success message
+      setLoginResponseMsg(prevState => {
+        return [...prevState, { messages: "Sign in successful" }];
+      })
+
+      // Message and redirect delay. 2 sec
+      setTimeout(() => {
+        setLoginResponseMsg([]); // Clear validation messages
+        // RE-ENABLE IT
+        router.push('/')
+      }, 2000)
+
     }
     catch (error) {
       console.error(error);
       
     }
-
   }
 
+  const responseTextRender = () => {
+    return (
+      <ul className={styles.errorMsgsUL}>
+        {loginResponseMsg.map((element, index) => (
+          <li key={index} className={styles.errorMsgList}>* {element.messages}</li>
+        ))}
+      </ul>
+    )
+  }
 
   return (
     <div className={styles.loginContainer}>
@@ -117,6 +154,7 @@ export default function Login () {
             )
           })}
         </ul>
+        {responseTextRender()}
         <button
           className={styles.submitButton}
           type="submit"

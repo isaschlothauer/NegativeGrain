@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import { LoginInputDataProps } from '../../@types/express/index'
 import { usernameVerification } from '../services/username_verification'
 import { loginPasswordVerification } from '../services/login_password_verify'
-import { JWTGenerate } from '../services/jwt_generate'
+import { JWTGenerate } from '../services/jwt_services'
 
 const router = Router();
 
@@ -41,7 +41,7 @@ router.post('/', async (req: Request, res: Response) => {
     // Setting session cookies
     res.cookie("authenticationToken", authToken, options);
 
-    res.status(200).send({ success: true, messages: ["Log in successful"]});
+    return res.status(200).send({ success: true, messages: ["Log in successful"]});
   }
 })
 

@@ -1,9 +1,25 @@
+import { useEffect, useContext } from 'react'
+import { UserDataContext } from '../../context/userContext';
 import styles from './index.module.css'
 import landingBackground from '../../../public/images/_D753897_resize.jpg'
 import Image from 'next/image'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useExpirationValidator } from '../../hooks/useExpirationValidator'
 
 export default function Landing () {
+  const authenticationState : any = useExpirationValidator();
+  const { isUserLoggedIn, setIsUserLoggedOn } = useContext(UserDataContext)
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (authenticationState && authenticationState.status === 200) {
+      // console.log("landing", isUserLoggedIn)
+      router.push('/');
+    } 
+  });
+
   return (
     <div className={styles.signUp}>
       <Image 

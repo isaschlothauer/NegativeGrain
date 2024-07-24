@@ -1,5 +1,6 @@
 'use client'
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeEvent, useContext } from 'react';
+import { UserDataContext } from '../context/userContext';
 import styles from './page.module.css'
 import SignInBackGround from '../../public/images/_D753943-resize.jpg'
 import Link from 'next/link'
@@ -8,6 +9,8 @@ import { RegistrationListItems } from './registrationList'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import axios from 'axios';
+import { useExpirationValidator } from '../hooks/useExpirationValidator'
+
 const ClearButton = dynamic(() => import('../_components/ClearButton'))
 
 export interface newUserRDataProps {
@@ -32,10 +35,20 @@ export default function SignUp () {
     password: '',
     cPassword: ''
   })
+  const { isUserLoggedIn, setIsUserLoggedOn } = useContext(UserDataContext)
+
 
   // Error message array
   const [ validationResponse, setValidationResponse ] = useState<ErrorProps[]>([])
+  
   const router = useRouter();
+  const authenticationState : any = useExpirationValidator();
+
+  useEffect(() => {
+    if (authenticationState && authenticationState.status === 200) {
+      router.push('/');
+    } 
+  });
 
   const submissionHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

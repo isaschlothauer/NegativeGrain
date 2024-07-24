@@ -93,3 +93,14 @@
   margin-top: 0.3em;
   font-size: 0.8em;
 }
+
+.errorMsgsUL {
+  list-style-type: none;
+  display: block;
+}
+
+.errorMsgList {
+  font-size: 0.8em;
+  color: var(--ErrorTextColor);
+  text-align: center;
+}

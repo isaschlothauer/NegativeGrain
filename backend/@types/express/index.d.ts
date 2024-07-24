@@ -42,3 +42,9 @@ export interface CookieOptionProps {
   secure: boolean,
   signed: boolean,
 }
+
+export type UserProfileForAuthentication = Omit<NewAccountRegistrationProps, "cPassword"> & {
+  created_at: string,
+  iat: number,
+  exp: number,
+}

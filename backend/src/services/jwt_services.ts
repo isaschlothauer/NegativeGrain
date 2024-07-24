@@ -1,11 +1,13 @@
 import { database } from '../config/database'
-import { LoginInputDataProps, UserLoginProps, CookieOptionProps } from '../../@types/express/index'
+import { UserProfileForAuthentication, UserLoginProps, CookieOptionProps } from '../../@types/express/index'
 import argon2 from 'argon2';
 import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
+const jwtSecret: string | undefined = process.env.JWT_SECRET
+let token: any;
+
 export const JWTGenerate = async (username: string) => {
-  const jwtSecret: string | undefined = process.env.JWT_SECRET
 
     // Cookie options
     const cookieOptions: CookieOptionProps = {
@@ -26,14 +28,12 @@ export const JWTGenerate = async (username: string) => {
       return false
 
     const tokenData = rows[0] as UserLoginProps;
-
-    // console.log(tokenData);
-
+    
     if (!jwtSecret) {
       return false;
     }
 
-    const token = jwt.sign(tokenData, jwtSecret, { expiresIn: '3h' });
+    token = jwt.sign(tokenData, jwtSecret, { expiresIn: '3h' });
     
     if (!token) {
       return false
@@ -57,3 +57,23 @@ export const JWTGenerate = async (username: string) => {
   }
 }
 
+
+export const jwtVerification = async (token: string) => {
+  
+  try {
+    if (jwtSecret && token) {
+        const verifiedUser = jwt.verify(token, jwtSecret);
+
+        console.log(verifiedUser)
+        
+        if (verifiedUser)
+          return true;
+        else
+          return false;
+    }
+  }
+  catch (err) {
+    console.error(err);
+    return undefined
+  }
+}

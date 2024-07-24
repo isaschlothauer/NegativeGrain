@@ -1,13 +1,13 @@
+'use client'
 import type { Metadata } from "next";
 import { Chathura, Roboto, Unica_One } from "next/font/google";
 import "./globals.css";
 import styles from './page.module.css';
 import '@mantine/core/styles.css';
 import { ColorSchemeScript, MantineProvider, rem } from '@mantine/core';
-
 import Header from './_components/Header'
-import { Suspense } from "react";
-
+import { UserDataContext } from './context/userContext';
+import { useState } from 'react';
 
 // const chathura = Chathura({ subsets: ["latin"] });
 export const chathura = Chathura({ subsets: ["latin"],  weight: '400' });
@@ -25,6 +25,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [isUserLoggedIn, setIsUserLoggedOn] = useState<boolean>(false);
   return (
     <html lang="en">
       <body className={`${styles.layoutStyle} ${chathura.className}`}>
@@ -39,10 +40,12 @@ export default function RootLayout({
           },
         }}
         >
-        <div className={`${styles.mainContainer} ${chathura.className}`}>
-          <Header />
-          {children}
-        </div>
+          <UserDataContext.Provider value={{ isUserLoggedIn, setIsUserLoggedOn }}>
+            <div className={`${styles.mainContainer} ${chathura.className}`}>
+              <Header />
+              {children}
+            </div>
+            </UserDataContext.Provider>
         </MantineProvider>
       </body>
     </html>
