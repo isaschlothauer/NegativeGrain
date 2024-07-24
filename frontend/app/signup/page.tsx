@@ -51,6 +51,7 @@ export default function SignUp () {
       setValidationResponse(prevState => {
         return [...prevState, { messages: "Passwords do not match" }];
       })
+      return;
     }
 
     try {
@@ -101,6 +102,7 @@ export default function SignUp () {
     }
     catch (error: any) {
       const errorMsg = error.response;
+      console.error("debug: ", errorMsg);
 
 
       if (errorMsg.data.success == false && errorMsg.data.errors !='"cPassword" must be [ref:password]') {
