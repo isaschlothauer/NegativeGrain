@@ -1,7 +1,7 @@
 import { database } from "../config/database";
 import { UserDuplicateCheckUsername, UserDuplicateCheckEmail } from '../../@types/express/index'
 
-export async function newAccountDatabase (username: string, email : string) {
+export async function checkDuplicates (username: string, email : string) {
 
   // true: username or email exists in database
   // false: no username or email present in database

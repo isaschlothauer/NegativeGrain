@@ -15,7 +15,7 @@ export interface UserDuplicateCheckUsername extends RowDataPacket {
 }
 
 export interface UserDuplicateCheckEmail extends RowDataPacket {
-  username: string;
+  email: string;
 }
 
 export type NewUserDataPasswordHash = Omit<NewAccountRegistrationProps, "password" | "cPassword"> & {

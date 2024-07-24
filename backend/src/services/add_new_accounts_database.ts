@@ -7,7 +7,7 @@ export async function addNewAccountDatabase (newUser: NewUserDataPasswordHash) {
   const { username, firstname, lastname, email, password_hash } = newUser;
 
   try {
-    await database.promise().query<ResultSetHeader>("INSERT IGNORE INTO User (username, firstname, lastname, email, password_hash, created_at) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)", [username, firstname, lastname, email, password_hash])
+    await database.promise().query<ResultSetHeader>("INSERT INTO User (username, firstname, lastname, email, password_hash, created_at) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)", [username, firstname, lastname, email, password_hash])
 
     return true;
   } 

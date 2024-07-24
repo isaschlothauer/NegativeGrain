@@ -4,7 +4,7 @@ import styles from './page.module.css'
 import SignInBackGround from '../../public/images/_D753943-resize.jpg'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
-import { RegistrationListItems } from '../_components/AccountRegistration/registrationList'
+import { RegistrationListItems } from './registrationList'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import axios from 'axios';
@@ -102,8 +102,6 @@ export default function SignUp () {
     }
     catch (error: any) {
       const errorMsg = error.response;
-      console.error("debug: ", errorMsg);
-
 
       if (errorMsg.data.success == false && errorMsg.data.errors !='"cPassword" must be [ref:password]') {
 
