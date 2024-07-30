@@ -22,7 +22,7 @@ export const useExpirationValidator = () => {
         }
         catch (error: any) {
 
-          console.error("Verification error", error)
+          // console.error("Verification error", error)
         }
       } 
       loginStatusCheck();
