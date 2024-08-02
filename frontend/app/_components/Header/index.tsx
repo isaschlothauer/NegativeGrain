@@ -36,6 +36,8 @@ export default function Header () {
       setMenuSelector(burgerMenuItemsLoggedIn)
   })
 
+  // Header Title link behavior to work with Link and by turning off the 
+
   return (
     <header>
       <div className={styles.headerContainer}>

@@ -9,7 +9,9 @@ const api = Router()
 .use('/accountRegister', newAccountValidation, AccountCreationController)
 .use('/login', loginInputValidation, LoginController)
 .use('/onlineAuthentication', credentialVerificationController)
-
+.use('/destroyCookie', (req, res) => {
+  console.log("all ok")
+})
 
 
 

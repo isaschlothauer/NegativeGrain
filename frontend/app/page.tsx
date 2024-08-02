@@ -6,6 +6,7 @@ import { chathura } from "./layout";
 import dynamic from 'next/dynamic'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useExpirationValidator } from './hooks/useExpirationValidator'
+import { autoSignOff } from './_services/AutoSignOff.service'
 // import { UserLoginProps } from '../../backend/@types/express/index';
 
 // import urlUpdate from './_services/UrlUpdate';
@@ -27,10 +28,23 @@ export default function Home() {
     window.history.pushState(null, '', `?${params.toString()}`)
   }
 
+  console.log("auth state: ", authenticationState)
   useEffect(() => {
     if (authenticationState && authenticationState.status === 200 && isUserLoggedIn == false) {
       setIsUserLoggedOn(true);
+      console.log("authenticationState && authenticationState.status === 200 && isUserLoggedIn == false")
+    } else if (authenticationState && authenticationState.status !== 200) {
+      console.log("authenticationState && authenticationState.status !== 200")
+      setIsUserLoggedOn(false);
+    } else if (authenticationState == undefined) {
+      console.log("main page useeffect test")
+      autoSignOff();
+      // setIsUserLoggedOn(false);
+      // router.push("/?page=new");
+      // console.log("test")
     }
+    
+    console.log(authenticationState)
   });
 
   useEffect(() => {
