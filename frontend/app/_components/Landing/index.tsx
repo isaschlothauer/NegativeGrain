@@ -9,16 +9,9 @@ import { useExpirationValidator } from '../../hooks/useExpirationValidator'
 
 export default function Landing () {
   const authenticationState : any = useExpirationValidator();
-  const { isUserLoggedIn, setIsUserLoggedOn } = useContext(UserDataContext)
+  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(UserDataContext)
 
   const router = useRouter();
-
-  useEffect(() => {
-    if (authenticationState && authenticationState.status === 200) {
-      // console.log("landing", isUserLoggedIn)
-      router.push('/');
-    } 
-  });
 
   return (
     <div className={styles.signUp}>

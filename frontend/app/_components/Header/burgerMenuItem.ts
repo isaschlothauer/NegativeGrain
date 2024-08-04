@@ -31,7 +31,7 @@ export const burgerMenuItemsLoggedIn = [
   {
     id: 2,
     item: 'Upload',
-    destination: '/'
+    destination: '/contentUpload'
   },
   {
     id: 3,

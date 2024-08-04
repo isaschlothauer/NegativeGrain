@@ -1,17 +1,18 @@
 'use client'
 import { ChangeEvent, ReactHTMLElement, useEffect, useState } from 'react';
-import { chathura } from '@/app/layout'
-import styles from './page.module.css'
-import { inputListItems } from './inputList'
+import { chathura } from '@/app/layout';
+import styles from './page.module.css';
+import { inputListItems } from './inputList';
 import { useContext } from 'react';
 import { UserDataContext } from '../context/userContext';
-import Link from 'next/link'
-import Image from 'next/image'
+import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import LoginBackground from '../../public/images/D75_7907-resize.jpg'
+import LoginBackground from '../../public/images/D75_7907-resize.jpg';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
-import { useExpirationValidator } from '../hooks/useExpirationValidator'
+import { useExpirationValidator } from '../hooks/useExpirationValidator';
+import { LoginStateSetter } from '../_services/LoginStateSetter';
 
 const ClearButton = dynamic(() => import('../_components/ClearButton'))
 
@@ -30,18 +31,14 @@ export default function Login () {
     password: '',
   })
   const [ loginResponseMsg, setLoginResponseMsg ] = useState<ErrorProps[]>([])
-  const { isUserLoggedIn, setIsUserLoggedOn } = useContext(UserDataContext)
-
+  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(UserDataContext)
 
   const router = useRouter();
   const authenticationState : any = useExpirationValidator();
 
-  useEffect(() => {
-    if (authenticationState && authenticationState.status === 200) {
-      router.push('/');
-    } 
-  });
-
+  // Sets isUserLoggedIn context
+  LoginStateSetter(authenticationState)
+  
   // Input handler
   const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -97,14 +94,12 @@ export default function Login () {
       // Message and redirect delay. 2 sec
       setTimeout(() => {
         setLoginResponseMsg([]); // Clear validation messages
-        // RE-ENABLE IT
         router.push('/')
       }, 2000)
 
     }
     catch (error) {
       console.error(error);
-      
     }
   }
 

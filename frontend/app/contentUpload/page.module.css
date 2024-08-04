@@ -1,0 +1,49 @@
+.contentUploadContainer {
+  width: 100vw;  
+  /* max-width: 1200px; */
+  /* margin: 0 auto; */
+  height: calc(100vh - 60px);
+  /* display: flex; */
+  /* margin: auto; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uploadMain {
+  width: 1200px;
+}
+
+.uploadTitle {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.uploadForm {
+  max-width: 700px;
+}
+
+.uploadForm > * {
+  display: block;
+}
+
+.uploadInput {
+  font-size: 0.5em;
+  margin: auto
+
+}
+
+.uploadSubmitButton {
+  display: flex;
+  margin: auto;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  padding: 0.3em 1em; /* Adjust padding as needed */
+  font-size: 0.8em;
+  height: 1em; /* Adjust height as needed */
+  line-height: 1.5em; /* Adjust line-height as needed */
+  cursor: pointer; /* Adds a pointer cursor on hover */
+  border: 1px solid rgba(46, 46, 46, 0.7); /* Remove default button border */
+  
+  border-radius: 4px; /* Optional: add border radius */
+}

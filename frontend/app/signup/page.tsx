@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, ChangeEvent, useContext } from 'react';
+import { useState, ChangeEvent, useContext } from 'react';
 import { UserDataContext } from '../context/userContext';
 import styles from './page.module.css'
 import SignInBackGround from '../../public/images/_D753943-resize.jpg'
@@ -10,6 +10,7 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import axios from 'axios';
 import { useExpirationValidator } from '../hooks/useExpirationValidator'
+import { LoginStateSetter } from '../_services/LoginStateSetter';
 
 const ClearButton = dynamic(() => import('../_components/ClearButton'))
 
@@ -27,6 +28,7 @@ interface ErrorProps {
 }
 
 export default function SignUp () {
+  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(UserDataContext)
   const [ newUserData, setNewUserData ] = useState<newUserRDataProps>({
     username: '',
     firstname: '',
@@ -35,20 +37,14 @@ export default function SignUp () {
     password: '',
     cPassword: ''
   })
-  const { isUserLoggedIn, setIsUserLoggedOn } = useContext(UserDataContext)
-
 
   // Error message array
   const [ validationResponse, setValidationResponse ] = useState<ErrorProps[]>([])
-  
-  const router = useRouter();
   const authenticationState : any = useExpirationValidator();
+  const router = useRouter();
 
-  useEffect(() => {
-    if (authenticationState && authenticationState.status === 200) {
-      router.push('/');
-    } 
-  });
+  // Sets isUserLoggedIn context
+  LoginStateSetter(authenticationState)
 
   const submissionHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -1,9 +1,11 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/navigation';
+import { UserDataContext  } from '../context/userContext';
 
 export const useExpirationValidator = () => {  
   const [ authResponse, setAuthResponse ] = useState<any>()
+  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(UserDataContext);
   
   const router = useRouter();
 
@@ -15,17 +17,16 @@ export const useExpirationValidator = () => {
             headers: {
               'Access-Control-Allow-Origin': '*', 
               'Content-Type': 'application/cookie'
-              }
-            })
-            
-            setAuthResponse(response);
+            }
+          })
+          setAuthResponse(response);
         }
         catch (error: any) {
-
-          // console.error("Verification error", error)
+          // Debug console
+          setAuthResponse(error);
         }
       } 
-      loginStatusCheck();
+        loginStatusCheck();
   }, [])
 
   return authResponse;

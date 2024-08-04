@@ -25,7 +25,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isUserLoggedIn, setIsUserLoggedOn] = useState<boolean>(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean | undefined>(undefined);
   return (
     <html lang="en">
       <body className={`${styles.layoutStyle} ${chathura.className}`}>
@@ -40,7 +40,7 @@ export default function RootLayout({
           },
         }}
         >
-          <UserDataContext.Provider value={{ isUserLoggedIn, setIsUserLoggedOn }}>
+          <UserDataContext.Provider value={{ isUserLoggedIn, setIsUserLoggedIn }}>
             <div className={`${styles.mainContainer} ${chathura.className}`}>
               <Header />
               {children}
