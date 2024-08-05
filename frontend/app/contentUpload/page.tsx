@@ -29,11 +29,11 @@ export default function ContentUpload () {
   function hSubmit(e: any) {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("upload", inputRef.current.files[0]);
+    // const formData = new FormData();
+    // formData.append("upload", inputRef.current.files[0]);
 
-    console.log(formData);
-    axios.post("http://localhost:5000/upload", formData);
+    // console.log(formData);
+    // axios.post("http://localhost:5000/upload", formData);
   }
 
 
@@ -45,7 +45,7 @@ export default function ContentUpload () {
             <p className={styles.uploadTitle}>Image Upload</p>
             <form encType="multipart/form-data" onSubmit={hSubmit} className={styles.uploadForm}>
               <input type="file" name="upload" ref={inputRef} className={styles.uploadInput}/>
-              <button className={styles.uploadSubmitButton} type="submit">Send</button>
+              <button className={styles.uploadSubmitButton} type="submit">Upload</button>
             </form>
           </div>
         </div>
