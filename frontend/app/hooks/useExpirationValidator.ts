@@ -1,11 +1,14 @@
 import axios from 'axios';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, SetStateAction } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserDataContext  } from '../context/userContext';
 
 export const useExpirationValidator = () => {  
   const [ authResponse, setAuthResponse ] = useState<any>()
-  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(UserDataContext);
+  // const { isLoggedIn, userData } = useContext(UserDataContext);
+  // const { isUserLoggedIn, setIsUserLoggedIn } = isLoggedIn;
+
+  // const { isUserLoggedIn, setIsUserLoggedIn } = useContext(UserDataContext);
   
   const router = useRouter();
 

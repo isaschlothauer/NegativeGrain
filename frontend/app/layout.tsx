@@ -7,7 +7,7 @@ import '@mantine/core/styles.css';
 import { ColorSchemeScript, MantineProvider, rem } from '@mantine/core';
 import Header from './_components/Header'
 import { UserDataContext } from './context/userContext';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 // const chathura = Chathura({ subsets: ["latin"] });
 export const chathura = Chathura({ subsets: ["latin"],  weight: '400' });
@@ -25,7 +25,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean | undefined>(undefined);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean | undefined>(false);
+  const [user, setUser] = useState({
+    username: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    created_at: "",
+    exp: null as number | null,
+    iat: null as number | null,
+  });
+  
   return (
     <html lang="en">
       <body className={`${styles.layoutStyle} ${chathura.className}`}>
@@ -40,7 +50,12 @@ export default function RootLayout({
           },
         }}
         >
-          <UserDataContext.Provider value={{ isUserLoggedIn, setIsUserLoggedIn }}>
+          {/* <UserDataContext.Provider value={{ isUserLoggedIn, setIsUserLoggedIn }}> */}
+          <UserDataContext.Provider value={{ 
+            isLoggedIn: { isUserLoggedIn, setIsUserLoggedIn }, 
+            userData: { user, setUser } 
+          }}>
+
             <div className={`${styles.mainContainer} ${chathura.className}`}>
               <Header />
               {children}

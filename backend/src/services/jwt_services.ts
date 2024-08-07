@@ -3,6 +3,7 @@ import { UserProfileForAuthentication, UserLoginProps, CookieOptionProps } from 
 import argon2 from 'argon2';
 import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import express from 'express';
 
 const jwtSecret: string | undefined = process.env.JWT_SECRET
 let token: any;
@@ -62,14 +63,13 @@ export const jwtVerification = async (token: string) => {
   
   try {
     if (jwtSecret && token) {
-        const verifiedUser = jwt.verify(token, jwtSecret);
-
-        console.log(verifiedUser)
-        
-        if (verifiedUser)
-          return true;
-        else
-          return false;
+      const verifiedUser = jwt.verify(token, jwtSecret);
+              
+      if (verifiedUser) {
+        return verifiedUser;
+      } else {
+        return undefined;
+      }
     }
   }
   catch (err) {

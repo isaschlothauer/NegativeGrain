@@ -5,12 +5,8 @@ import landingBackground from '../../../public/images/_D753897_resize.jpg'
 import Image from 'next/image'
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useExpirationValidator } from '../../hooks/useExpirationValidator'
 
 export default function Landing () {
-  const authenticationState : any = useExpirationValidator();
-  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(UserDataContext)
-
   const router = useRouter();
 
   return (

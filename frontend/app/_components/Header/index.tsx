@@ -1,5 +1,5 @@
 'use client'
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, ReactNode } from 'react';
 import styles from './index.module.css'
 import { Menu } from '@mantine/core';
 import { UserDataContext } from '../../context/userContext';
@@ -12,6 +12,9 @@ import { NavMenuProps } from '../Header/burgerMenuItem'
 import Image from 'next/image'
 import SearchIcon from '../../../public/icons/bx-search.svg'
 import dynamic from 'next/dynamic';
+import { IconUser } from '@tabler/icons-react';
+import LoggedInDropDownMenuWide from '../LoggedInDropDownMenuWide'
+
 const ClearButton = dynamic(() => import('../../_components/ClearButton'))
 
 
@@ -22,21 +25,31 @@ const ClearButton = dynamic(() => import('../../_components/ClearButton'))
 // * log off
 
 export default function Header () {
-  const { isUserLoggedIn } = useContext(UserDataContext)
+  const { isLoggedIn, userData } = useContext(UserDataContext);
+  const { isUserLoggedIn, setIsUserLoggedIn } = isLoggedIn;
+  const { user } = userData;
+  const { username } = user;
+
   const [opened, { toggle }] = useDisclosure();
+  const [ iconToggleMenu, setIconToggleMenu ] = useState<boolean>(false);
   const [ menuSelector, setMenuSelector ] = useState<NavMenuProps[]>(burgerMenuItems)
   const [ searchValue, setSearchValue ] = useState<string>("");
 
-  useEffect(() => {
 
+  useEffect(() => {
     // Menu item loader
+    console.log(iconToggleMenu)
     if (!isUserLoggedIn)
       setMenuSelector(burgerMenuItems)
     else
       setMenuSelector(burgerMenuItemsLoggedIn)
-  })
+  },[isUserLoggedIn, iconToggleMenu])
 
   // Header Title link behavior to work with Link and by turning off the 
+
+  const dropDownMenuTrigger: () => void = () => {
+    setIconToggleMenu(prevState => !prevState);
+  }
 
   return (
     <header>
@@ -44,7 +57,8 @@ export default function Header () {
         <div className={styles.headerMainSection}>
           <Link href="/" className={styles.headerTitle}>
             <h1 className={`${styles.headerText} ${unica_one.className}`}>
-              Negative Grain
+              Negative Grain             
+
             </h1>
           </Link>
           <div className={styles.headerMenu}>
@@ -85,28 +99,36 @@ export default function Header () {
               
               {isUserLoggedIn &&
               menuSelector
-                .filter(element => element.id != 3)
+                .filter(element => element.id != 2)
                 .map((element) => {
                 if (element.id != 3) {
                   return (
                     <li key={element.id}>
-                    <Link key={element.id}
-                      href={element.destination} 
-                      className={`${styles.loginLInk}`}
-                      style={{ textDecoration: 'none'}}
-                    > 
-                      {element.item}
-                    </Link>
-                  </li>
+                      <Link 
+                        href={element.destination} 
+                        className={`${styles.loginLInk}`}
+                        style={{ textDecoration: 'none'}}
+                      > 
+                        {element.item}
+                      </Link>
+                    </li>
                   )
                 }
               })}
+              {isUserLoggedIn? 
+                <button className={styles.iconStyle}>
+                  <IconUser onClick={dropDownMenuTrigger} /> 
+                </button>
+                :
+                <></>}
             </ul>
           </nav>
         </div>
       </div>
 
       {/* dropdown navigation items */}
+      {iconToggleMenu && <LoggedInDropDownMenuWide setIconToggleMenu={setIconToggleMenu} />}
+
       {opened 
       && 
       <div className={styles.dropDownMenu}>

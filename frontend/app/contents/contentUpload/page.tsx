@@ -1,15 +1,15 @@
 'use client'
 
 import { useEffect, useContext, useRef } from 'react'
-import { useExpirationValidator } from '../hooks/useExpirationValidator'
+import { useExpirationValidator } from '../../hooks/useExpirationValidator'
 import { useRouter } from 'next/navigation';
 
-import { UserDataContext } from '../context/userContext';
+import { UserDataContext } from '../../context/userContext';
 import styles from './page.module.css'
 import axios from 'axios';
 
 export default function ContentUpload () {
-  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(UserDataContext);
+  // const { isUserLoggedIn, setIsUserLoggedIn } = useContext(UserDataContext);
   const authenticationState : any = useExpirationValidator();
   const router = useRouter();
   const inputRef: any = useRef(null);

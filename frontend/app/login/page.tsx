@@ -31,13 +31,13 @@ export default function Login () {
     password: '',
   })
   const [ loginResponseMsg, setLoginResponseMsg ] = useState<ErrorProps[]>([])
-  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(UserDataContext)
 
   const router = useRouter();
   const authenticationState : any = useExpirationValidator();
 
   // Sets isUserLoggedIn context
-  LoginStateSetter(authenticationState)
+  // console.log("login page", authenticationState)
+  // LoginStateSetter(authenticationState)
   
   // Input handler
   const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -94,7 +94,7 @@ export default function Login () {
       // Message and redirect delay. 2 sec
       setTimeout(() => {
         setLoginResponseMsg([]); // Clear validation messages
-        router.push('/')
+        router.push('/contents')
       }, 2000)
 
     }

@@ -13,7 +13,7 @@ export default function Home() {
 
   const router = useRouter();
 
-  // Sets isUserLoggedIn context
+  // Sets isUserLoggedIn and user context
   LoginStateSetter(authenticationState)
 
   return (

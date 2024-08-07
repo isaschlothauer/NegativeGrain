@@ -28,7 +28,6 @@ interface ErrorProps {
 }
 
 export default function SignUp () {
-  const { isUserLoggedIn, setIsUserLoggedIn } = useContext(UserDataContext)
   const [ newUserData, setNewUserData ] = useState<newUserRDataProps>({
     username: '',
     firstname: '',

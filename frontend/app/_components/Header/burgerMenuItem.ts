@@ -15,32 +15,35 @@ export const burgerMenuItems: NavMenuProps[] = [
     item: 'Sign Up',
     destination: '/signup'
   },
-  {
-    id: 3,
-    item: 'Cancel',
-    destination: ''
-  },
+  // { id: 3, 
+  //   item: 'Icon',
+  //   destination: '/'
+  // }
 ]
 
-export const burgerMenuItemsLoggedIn = [
+export const burgerMenuItemsLoggedIn: NavMenuProps[]  = [
+  // {
+  //   id: 1,
+  //   item: 'Profile',
+  //   destination: '/'
+  // },
   {
     id: 1,
-    item: 'Profile',
-    destination: '/'
+    item: 'Upload',
+    destination: '/contents/contentUpload'
   },
   {
     id: 2,
-    item: 'Upload',
-    destination: '/contentUpload'
-  },
-  {
-    id: 3,
     item: 'Account Setting',
     destination: '/'
   },
-  {
-    id: 4,
-    item: 'Log Off',
-    destination: '/'
-  },
+  // { id: 3, 
+  //   item: 'Icon',
+  //   destination: '/'
+  // }
+  // {
+  //   id: 4,
+  //   item: 'Log Off',
+  //   destination: '/'
+  // },
 ]

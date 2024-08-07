@@ -1,0 +1,29 @@
+.dropDownContainer {
+  display: none;
+  position: absolute;
+  max-width: 7em;
+  background-color: var(--bgColor);
+  right: 3%;
+  padding: 0.5em 1em;
+  border-radius: 10px;
+
+}
+
+.listItem {
+  list-style-type: none;
+}
+
+.listStyle {
+  color: var(--fontColor)
+}
+
+.signOutButton {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+@media only screen and (min-width: 770px) {
+  .dropDownContainer {
+    display: block;
+  }
+}
