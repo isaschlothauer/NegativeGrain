@@ -61,12 +61,6 @@
   font-size: 0.9em;
 }
 
-
-.inputItemList {
-  margin: 0.5em 0;
-  display: flex;
-}
-
 .inputFieldStyle {
   height: 1em;
   border: none;
