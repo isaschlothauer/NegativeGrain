@@ -18,7 +18,6 @@ import LoggedInDropDownMenuWide from '../LoggedInDropDownMenuWide'
 const ClearButton = dynamic(() => import('../../_components/ClearButton'))
 
 
-
 // TODO
 // * Search api routing
 // * Log in
@@ -38,7 +37,6 @@ export default function Header () {
 
   useEffect(() => {
     // Menu item loader
-    console.log(iconToggleMenu)
     if (!isUserLoggedIn)
       setMenuSelector(burgerMenuItems)
     else
@@ -116,9 +114,9 @@ export default function Header () {
                 }
               })}
               {isUserLoggedIn? 
-                <button className={styles.iconStyle}>
-                  <IconUser onClick={dropDownMenuTrigger} /> 
-                </button>
+                  <button className={styles.iconStyle}>
+                    <IconUser onClick={dropDownMenuTrigger} /> 
+                  </button>
                 :
                 <></>}
             </ul>

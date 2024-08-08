@@ -2,8 +2,9 @@ import { useEffect, useContext } from 'react';
 import { UserDataContext } from '../context/userContext';
 import { useExpirationValidator } from '../hooks/useExpirationValidator'
 import { useRouter } from 'next/navigation'
+import path from 'path';
 
-export function LoginStateSetter (authentication: any) {
+export function LoginStateSetter (authentication: any, urlPath: string | undefined) {
   const authenticationState = useExpirationValidator();
   const { isLoggedIn, userData } = useContext(UserDataContext);
   const { isUserLoggedIn, setIsUserLoggedIn } = isLoggedIn;
@@ -32,6 +33,7 @@ export function LoginStateSetter (authentication: any) {
 
   useEffect(() => {
     if (isUserLoggedIn) {
+      // console.log("path", path);
       router.push('/contents');
     }
   });

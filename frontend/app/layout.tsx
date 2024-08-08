@@ -35,7 +35,7 @@ export default function RootLayout({
     exp: null as number | null,
     iat: null as number | null,
   });
-  
+  const [path, setPath] = useState<string | undefined>();
   return (
     <html lang="en">
       <body className={`${styles.layoutStyle} ${chathura.className}`}>
@@ -53,7 +53,8 @@ export default function RootLayout({
           {/* <UserDataContext.Provider value={{ isUserLoggedIn, setIsUserLoggedIn }}> */}
           <UserDataContext.Provider value={{ 
             isLoggedIn: { isUserLoggedIn, setIsUserLoggedIn }, 
-            userData: { user, setUser } 
+            userData: { user, setUser },
+            currentPath: { path, setPath}
           }}>
 
             <div className={`${styles.mainContainer} ${chathura.className}`}>

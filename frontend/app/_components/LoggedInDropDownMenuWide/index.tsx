@@ -7,14 +7,14 @@ import { autoSignOff } from '@/app/_services/AutoSignOff.service';
 import { useRouter } from 'next/navigation';
 import { UserDataContext } from '@/app/context/userContext';
 
-
 interface LoggedInDropDownMenuWideProps {
   setIconToggleMenu: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function LoggedInDropDownMenuWide ({ setIconToggleMenu }: LoggedInDropDownMenuWideProps) {
-  const { isLoggedIn } = useContext(UserDataContext);
+  const { isLoggedIn, userData } = useContext(UserDataContext);
   const { isUserLoggedIn, setIsUserLoggedIn } = isLoggedIn;
+  const { user } = userData;
   const [ isSignOffTriggerOn, setIsSignOffTriggerOn ] = useState<boolean>(false);
   const router = useRouter();
 
@@ -22,7 +22,6 @@ export default function LoggedInDropDownMenuWide ({ setIconToggleMenu }: LoggedI
     setIsSignOffTriggerOn(true);
     autoSignOff();
   }
-
 
   // If not authorized, redirect to the landing page
   useEffect(() => {
@@ -34,7 +33,9 @@ export default function LoggedInDropDownMenuWide ({ setIconToggleMenu }: LoggedI
 
   return (
     <section className={styles.dropDownContainer}>
-      <ul>
+      <p className={styles.usernameStyles}>{user.username}</p>
+      <p className={styles.userEmail}>{user.email}</p>
+      <ul className={styles.uList}>
         {dropdownMenuListItems.map((element) => {
           return (
             <li key={element.id} className={styles.listItem}>

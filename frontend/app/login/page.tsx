@@ -81,8 +81,6 @@ export default function Login () {
         })
       }
 
-      console.log(response.data.messages);
-
       // Clear response mesasge
       setLoginResponseMsg([])
 

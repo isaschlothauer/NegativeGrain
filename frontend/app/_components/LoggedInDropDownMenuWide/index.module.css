@@ -6,7 +6,7 @@
   right: 3%;
   padding: 0.5em 1em;
   border-radius: 10px;
-
+  box-shadow: 0px 3px 6px rgba(151, 151, 151, 0.7);
 }
 
 .listItem {
@@ -20,6 +20,20 @@
 .signOutButton {
   border: none;
   background-color: rgba(0, 0, 0, 0);
+}
+
+.usernameStyles {
+  font-size: 1.1em;
+  /* margin-bottom: 0.3em; */
+  line-height: 0.3;
+}
+
+.userEmail {
+  font-size: 0.8em;
+}
+
+.uList {
+  margin-top: 0.5em;
 }
 
 @media only screen and (min-width: 770px) {

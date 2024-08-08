@@ -18,6 +18,10 @@ interface UserDataContextProps {
   userData: {
     user: UserData;
     setUser: Dispatch<SetStateAction<UserData>>;
+  },
+  currentPath: {
+    path: string | undefined;
+    setPath: Dispatch<SetStateAction<string | undefined>>;
   }
 }
 
@@ -39,6 +43,9 @@ export const UserDataContext = createContext<UserDataContextProps>({
     userData: {
       user: defaultUserData,
       setUser: () => undefined,
-
-  }
+    },
+    currentPath: {
+      path: undefined,
+      setPath: () => undefined,
+    }
 });
