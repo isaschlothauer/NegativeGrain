@@ -34,6 +34,11 @@ export const burgerMenuItemsLoggedIn: NavMenuProps[]  = [
   },
   {
     id: 2,
+    item: 'Profile',
+    destination: '/'
+  },
+  {
+    id: 3,
     item: 'Account Setting',
     destination: '/'
   },

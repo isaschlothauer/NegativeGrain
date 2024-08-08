@@ -14,6 +14,9 @@ import SearchIcon from '../../../public/icons/bx-search.svg'
 import dynamic from 'next/dynamic';
 import { IconUser } from '@tabler/icons-react';
 import LoggedInDropDownMenuWide from '../LoggedInDropDownMenuWide'
+import { autoSignOff } from '@/app/_services/AutoSignOff.service';
+import { useRouter } from 'next/navigation';
+
 
 const ClearButton = dynamic(() => import('../../_components/ClearButton'))
 
@@ -27,13 +30,15 @@ export default function Header () {
   const { isLoggedIn, userData } = useContext(UserDataContext);
   const { isUserLoggedIn, setIsUserLoggedIn } = isLoggedIn;
   const { user } = userData;
-  const { username } = user;
+  const { username, email } = user;
+  const router = useRouter();
+
 
   const [opened, { toggle }] = useDisclosure();
   const [ iconToggleMenu, setIconToggleMenu ] = useState<boolean>(false);
   const [ menuSelector, setMenuSelector ] = useState<NavMenuProps[]>(burgerMenuItems)
   const [ searchValue, setSearchValue ] = useState<string>("");
-
+  const [ isSignOffTriggerOn, setIsSignOffTriggerOn ] = useState<boolean>(false);
 
   useEffect(() => {
     // Menu item loader
@@ -49,6 +54,18 @@ export default function Header () {
     setIconToggleMenu(prevState => !prevState);
   }
 
+  const signOutRerender: () => void = () => {
+    setIsSignOffTriggerOn(true);
+    autoSignOff();
+  }
+
+    // If not authorized, redirect to the landing page
+    useEffect(() => {
+      if (isSignOffTriggerOn == true) {
+        router.push('/');
+        setIconToggleMenu(false);
+      }
+    })
   return (
     <header>
       <div className={styles.headerContainer}>
@@ -131,6 +148,10 @@ export default function Header () {
       && 
       <div className={styles.dropDownMenu}>
         <nav>
+          <div className={styles.userInfo}>
+            <p className={styles.userInfoUserName}>{user.username}</p>
+            <p>{user.email}</p>
+          </div>
           <ul className={styles.uList}>
             {/* Search menu */}
             <li key={0} className={`${styles.NavListWithSearchClear} ${styles.listWithSearchClear}`}>
@@ -172,6 +193,8 @@ export default function Header () {
               })
             }
           </ul>
+          {isUserLoggedIn &&
+          <button className={styles.signOutButton} onClick={signOutRerender}>Sign Out</button>}
         </nav>
       </div>}
     </header>
