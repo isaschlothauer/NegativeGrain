@@ -1,10 +1,11 @@
 .contentUploadContainer {
   width: 100vw;  
   /* height: calc(100vh - 60px); */
-  margin-top: 1em;
   display: flex;
   align-items: center;
   justify-content: center;
+  display: flex;
+  
 }
 
 .uploadMain {
@@ -13,7 +14,6 @@
 
 .uploadTitle {
   text-align: center;
-  font-size: 1.2em;
 }
 
 .uploadForm {
@@ -26,19 +26,20 @@
   font-size: 0.5em;
   display: flex;
   margin: 0 auto;
+  margin-top: 30vh;
 }
 
 .imageDetailList {
   list-style-type: none;
-  padding: 0 1em;
+  padding: 0 0.5em;
   padding-bottom: 0.2em;
-  width: 10em;
+  max-width: 15em;
   margin: auto;
 }
 
 .inputItemList {
   margin: 0.5em 0;
-  display: flex;
+  display: block;
 }
 
 .inputItemList > * {
@@ -46,9 +47,23 @@
 }
 
 .inputItemList > label {
-  width: 3em;
+  width: 4em;
   color: var(--fontColor);
   font-size: 0.9em;
+}
+
+.inputItemList > input {
+  width: 100%;
+}
+
+
+.inputFieldClearIcon {
+  display: block;
+  width: 100%;
+}
+
+.textAreaStyle{
+  padding: 0.5em auto;
 }
 
 .inputFieldStyle {
@@ -56,7 +71,7 @@
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 1);
   padding: 0 0.3em;
-  border: 1px dotted red;
+  width: 100%;
 }
 
 .inputTextArea {
@@ -66,7 +81,7 @@
 .clearButton {
   height: 0.6em;
   width: 0.6em;
-  display: flex;
+  /* display: flex; */
   align-items: center; 
   justify-content: center;
   border: none;
@@ -90,3 +105,95 @@
   border: 1px solid rgba(46, 46, 46, 0.7);   
   border-radius: 4px; 
 }
+
+.previewContainer {
+  border: 1px dotted green;
+  display: flex;
+}
+
+.imagePosition {
+  max-width: 1000px;
+  max-height: 1000px;
+  margin: auto;
+}
+
+.errorMsg {
+  margin: 0.5em;
+  text-align: center;
+  color: var(--linkColor)
+}
+
+.submitCancelButtonContainer {
+  display: flex;
+}
+
+@media only screen and (min-width: 500px) {
+  .inputItemList {
+    display: flex;
+  }
+
+}
+
+/* @media only screen and (min-width: 500px) {
+  .imageDetailList {
+    margin: 0.5em auto;
+    border: 1px dotted red;
+    border: 1px dotted red;
+  }
+
+  .imageDetailLabel {
+    border: 1px dotted blue;
+    width: 5em;
+  }
+
+  .inputFieldStyle {
+    width: 10em;
+  }
+
+  .textAreaStyle{
+    padding: 0;
+  }
+
+  .inputItemList > label {
+    margin-right: 0.3em;
+  }
+
+  .inputItemList > * {
+    margin: auto;
+  
+  }
+  
+} */
+
+
+/* @media only screen and (min-width: 770px) { */
+  /* .inputItemList {
+      margin: 0.5em 0;
+      display: flex;
+    } */
+
+  /* .imageDetailList { */
+    /* width: 15em; */
+    /* width: 80%; */
+  /* } */
+
+
+
+
+  /* .inputFieldStyle { */
+    /* width: 10em; */
+  /* } */
+/* 
+  .inputItemList {
+    width: 100%;
+  } */
+
+  /* .inputItemList > label {
+    margin-right: 0.3em;
+  }
+
+  .inputItemList > * {
+    margin: auto;
+  
+  } */
+/* } */

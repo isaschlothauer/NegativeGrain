@@ -1,14 +1,14 @@
 'use client'
 
-import { useEffect, useContext, useRef, useState } from 'react'
-import { useExpirationValidator } from '../../hooks/useExpirationValidator'
+import { useEffect, useContext, useRef, useState, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation';
 import { imageData } from './uploadInputItem'
 import { UserDataContext } from '../../context/userContext';
-import styles from './page.module.css'
+import styles from './page.module.css';
+import Image from 'next/image';
+
 import axios from 'axios';
 import ClearButton from '@/app/_components/ClearButton';
-import { ImageDataProps } from './uploadInputItem'
 
 interface imageDataItemProps {
   imageDetailInputTitle: string,
@@ -18,41 +18,108 @@ interface imageDataItemProps {
   required: boolean,
 }
 
+interface ImageDataProps {
+  imageTitle: string,
+  brand: string,
+  camera: string,
+  lense: string,
+  flength: string,
+  aperture: string,
+  filmStock: string,
+  description: string,
+}
+
+interface ImageFileProps { 
+    fileName: File | null,
+    fileDataURL: string,
+}
+
+// TODO
+// Setup backend URL path
+// Change database table
+
+// Image file format
+const imageMimeType = /image\/(png|jpg|jpeg)/i;
+
 export default function ContentUpload () {
-  // const { isUserLoggedIn, setIsUserLoggedIn } = useContext(UserDataContext);
-  // const authenticationState : any = useExpirationValidator();
-  // const [ imageData, setimageData ] = useState<imageDataItemProps>({
-  //   imageDetailInputTitle: '',
-  //   placeholder: '',
-  //   data: '',
-  //   type: '',
-  //   required: false,
-  // })
-  const [ imageDetails, setImageDetails ] = useState<imageDataItemProps[]>(imageData)
+  const { isLoggedIn } = useContext(UserDataContext);
+  const { isUserLoggedIn } = isLoggedIn;
+  const [ imageFile, setImageFile] = useState<ImageFileProps>({
+    fileName: null,
+    fileDataURL: ''
+  })
+  const [ imageFileError, setImageFileError] = useState<string | null>()
+  const [fileDataURL, setFileDataURL] = useState('');
+  const [ imageDetails, setImageDetails ] = useState<ImageDataProps>({
+    imageTitle: '',
+    brand: '',
+    camera: '',
+    lense: '',
+    flength: '',
+    aperture: '',
+    filmStock: '',
+    description: ''
+  })
 
   const router = useRouter();
   const inputRef: any = useRef(null);
 
-
-  // useEffect(() => {
-  //   if (authenticationState && authenticationState.response.status === 401) {
-  //     setIsUserLoggedIn(false);
-  //   }
-  // }, [])
-
-  // useEffect(() => {
-  //   if (!isUserLoggedIn)
-  //     router.push('/');
-  // })
-
-  function hSubmit(e: any) {
+  function previewSubmit(e: any) {
     e.preventDefault();
 
-    // const formData = new FormData();
-    // formData.append("upload", inputRef.current.files[0]);
+    const file = e.currentTarget[0].files?.[0];
 
-    // console.log(formData);
-    // axios.post("http://localhost:5000/upload", formData);
+    if (!file.type.match(imageMimeType)) {
+      setImageFileError("Invalid image type");
+
+      setTimeout(() => {
+        setImageFileError("")
+      }, 2000)
+      return;
+    }
+
+    setImageFile((prevState) => ({
+      ...prevState,
+      fileName: file
+    }))
+  }
+
+  useEffect(() => {
+    if (imageFile.fileName) {
+      const fileReader = new FileReader();
+
+      fileReader.onload = (e: ProgressEvent<FileReader>) => {
+        const result = e.target?.result;
+        if (result) {
+          setImageFile((prevState) => ({
+            ...prevState,
+            fileDataURL: result.toString()
+          }))
+        }
+      };
+
+      fileReader.readAsDataURL(imageFile.fileName);
+    }
+  }, [imageFile.fileName]);
+
+  const uploadSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Merging image data
+    const image = {...imageFile, ...imageDetails}
+
+    // TO DO: CREATE AXIOS QUERY
+    // axios
+
+  }
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> )  => {
+    const { name, value } = e.target
+
+    setImageDetails((prevState) => ({
+      ...prevState,
+      [name]: value
+    }))
   }
 
   // Clear input fields
@@ -63,58 +130,136 @@ export default function ContentUpload () {
     }))
   }
 
-  console.log(imageData)
+  // Clear all fields
+  const clearAll: () => void = () => {
+    Object.entries(imageDetails).map((element) => (
+      setImageDetails((prevState) => ({
+        ...prevState,
+        [element[0]]: ''
+      }))
+    ))
+
+    // CLear ImageFile state
+    if (imageFile.fileName) {
+      setImageFile((prevState) => ({
+      ...prevState,
+      fileName: null
+    })) 
+    } else {
+      setImageFile((prevState) => ({
+        ...prevState,
+        fileDataURL: ''
+      })) 
+    }
+  }
 
   return (
     <>
-      <section>
+    {isUserLoggedIn? 
+        <section>
         <div className={styles.contentUploadContainer}>
           <div className={styles.uploadMain}>
             <p className={styles.uploadTitle}>Image Upload</p>
-            <form encType="multipart/form-data" onSubmit={hSubmit} className={styles.uploadForm}>
-              <input type="file" name="upload" ref={inputRef} className={styles.uploadInput}/>
-              <ul className={styles.imageDetailList}>
-                {imageDetails.map((element : any) => {
-                  return (
-                    element.id !== 6?
-                  <li key={element.id}>
-                    <div>
-                    <label htmlFor={element.data}>{element.imageDetailInputTitle} {element.required && <span className={styles.requiredMark}>*</span>}</label>
-                    <input 
-                      className={`${styles.inputFieldStyle}`}
-                      placeholder={element.placeholder}
-                      type={element.type}
-                      name={element.data}
-                      id={element.data}
-                      // value={newUserData[element.data as keyof newUserRDataProps]}
-                      // onChange={handleInputChange}
-                      required={element.required}
+            {!imageFile.fileName? 
+              <form encType="multipart/form-data" onSubmit={previewSubmit} className={styles.uploadForm}>
+              <input 
+                type="file" 
+                name="upload" 
+                ref={inputRef} 
+                className={styles.uploadInput}
+                accept='.png, .jpg, .jpeg'  
+              />
+              <button className={styles.uploadSubmitButton} type="submit">Preview</button>
+            </form>
+            :
+            imageFile.fileDataURL && (
+              <form encType="multipart/form-data" 
+                onSubmit={uploadSubmit} 
+                className={styles.uploadForm}
+              >
+                <div className={styles.previewContainer}>
+                  <div className={styles.imagePosition}>
+                    <Image
+                      src={imageFile.fileDataURL}
+                      width={700}  
+                      height={700} 
+                      alt={`${imageFile?.fileName} preview`}
+                      sizes="100vw"
+                      style={{ maxWidth: '100%', height: 'auto' }} 
                     />
-                    {/* <ClearButton setting={styles.clearButton} handleClear={() => clearInputFIelds(element.data)} /> */}
+                  </div>
+                </div>
+                              
+              <ul className={styles.imageDetailList}>
+              
+              {imageData.map((element: any) => {
+                return (
+                  element.id !== 7? 
+                  <li key={element.id}>
+                    <div className={`${styles.inputItemList}`}>
+                      <label htmlFor={element.data}>{element.imageDetailInputTitle}</label>
+                      <div className={styles.inputFieldClearIcon}>
+                        <input 
+                          className={`${styles.inputFieldStyle}`}
+                          placeholder={element.placeholder}
+                          type={element.type}
+                          name={element.data}
+                          id={element.data} 
+                          value={imageDetails[element.data as keyof ImageDataProps]}
+                          onChange={handleInputChange}
+                          required={element.required}
+                        />
+                        <ClearButton 
+                          setting={styles.clearButton} 
+                          handleClear={() => clearInputFIelds(element.data)} 
+                        />
+                      </div>
                     </div>
                   </li>
                   :
-                  <li key={element.id}>
-                    <label htmlFor={element.data}>{element.imageDetailInputTitle} {element.required && <span className={styles.requiredMark}>*</span>}</label>
+                  // MISSING VALUE
+                  <li key={element.id} className={styles.textAreaStyle}>
+                    <label htmlFor={element.data}>{element.imageDetailInputTitle}</label>
                     <textarea 
                       className={`${styles.inputTextArea}`}
                       placeholder={element.placeholder}
                       name={element.data}
                       id={element.data}
-                      />
-
+                      value={imageDetails[element.data as keyof ImageDataProps]}
+                      onChange={handleInputChange}
+                      required={element.required}
+                    />
                   </li>
-                  )
-                })}
-
+                )
+              })}
               </ul>
+              <div className={styles.submitCancelButtonContainer}>
+                <button 
+                  className={styles.uploadSubmitButton} 
+                  type="button"
+                  onClick={clearAll} 
+                >
+                    Cancel
+                </button>
+                <button 
+                  className={styles.uploadSubmitButton} 
+                  type="submit">
+                    Upload
+                </button>
+              </div>
+              </form>
+            )
+          }
 
-
-              <button className={styles.uploadSubmitButton} type="submit">Upload</button>
-            </form>
+          {/* Error message */}
+          {imageFileError && <div className={styles.errorMsg}>{imageFileError}</div>}
+          
           </div>
         </div>
       </section>
+    : 
+      <div>Loading</div>}
     </>
+
   )
 }

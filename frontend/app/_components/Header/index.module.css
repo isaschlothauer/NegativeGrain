@@ -5,10 +5,11 @@
 
 .headerMainSection {
   display: flex;
-  padding: 0 4%;
-  padding-top: 1em;
+  padding: 1em 4% 0.5em 4%;
+  /* padding-top: 1em; */
   /* max-width: 1200px; */
   margin: 0 auto;
+  margin: auto;
 }
 
 .headerTitle {
