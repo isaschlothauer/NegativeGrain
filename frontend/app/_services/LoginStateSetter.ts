@@ -4,7 +4,7 @@ import { useExpirationValidator } from '../hooks/useExpirationValidator'
 import { useRouter } from 'next/navigation'
 import path from 'path';
 
-export function LoginStateSetter (authentication: any, urlPath: string | undefined) {
+export function LoginStateSetter (authentication: any) {
   const authenticationState = useExpirationValidator();
   const { isLoggedIn, userData } = useContext(UserDataContext);
   const { isUserLoggedIn, setIsUserLoggedIn } = isLoggedIn;

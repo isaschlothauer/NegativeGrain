@@ -6,7 +6,7 @@ export const usernameVerification = async (username: string) => {
 
   
   try {
-    const [ user, _ ] = await database.promise().query<UsernameDB[]>("SELECT id FROM User WHERE username =?", [username])
+    const [ user, _ ] = await database.promise().query<UsernameDB[]>("SELECT id FROM users WHERE username =?", [username])
 
     if (user.length > 0) 
       return true;

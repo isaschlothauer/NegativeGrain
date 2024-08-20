@@ -19,6 +19,8 @@ router.post('/', async (req: Request, res: Response) => {
 
   try {
     users = await checkDuplicates(username, email);
+
+    console.log("test users: ", users)
   }
   catch (error) {
     return res.status(500).send({ success: false, errors: ["Server error. Unable to process request"]});

@@ -81,7 +81,6 @@
 .clearButton {
   height: 0.6em;
   width: 0.6em;
-  /* display: flex; */
   align-items: center; 
   justify-content: center;
   border: none;
@@ -95,6 +94,7 @@
 .uploadSubmitButton {
   display: flex;
   margin: auto;
+  margin-top: 1em; 
   justify-content: center; 
   align-items: center; 
   padding: 0.3em 1em; 
@@ -133,67 +133,3 @@
   }
 
 }
-
-/* @media only screen and (min-width: 500px) {
-  .imageDetailList {
-    margin: 0.5em auto;
-    border: 1px dotted red;
-    border: 1px dotted red;
-  }
-
-  .imageDetailLabel {
-    border: 1px dotted blue;
-    width: 5em;
-  }
-
-  .inputFieldStyle {
-    width: 10em;
-  }
-
-  .textAreaStyle{
-    padding: 0;
-  }
-
-  .inputItemList > label {
-    margin-right: 0.3em;
-  }
-
-  .inputItemList > * {
-    margin: auto;
-  
-  }
-  
-} */
-
-
-/* @media only screen and (min-width: 770px) { */
-  /* .inputItemList {
-      margin: 0.5em 0;
-      display: flex;
-    } */
-
-  /* .imageDetailList { */
-    /* width: 15em; */
-    /* width: 80%; */
-  /* } */
-
-
-
-
-  /* .inputFieldStyle { */
-    /* width: 10em; */
-  /* } */
-/* 
-  .inputItemList {
-    width: 100%;
-  } */
-
-  /* .inputItemList > label {
-    margin-right: 0.3em;
-  }
-
-  .inputItemList > * {
-    margin: auto;
-  
-  } */
-/* } */

@@ -21,7 +21,7 @@ export const JWTGenerate = async (username: string) => {
 
   try {
     const [rows] = await database.promise().query<RowDataPacket[]>(
-      "SELECT username, firstname, lastname, email, created_at FROM User WHERE username = ?;",
+      "SELECT username, firstname, lastname, email, created_at FROM users WHERE username = ?;",
       [username]
     );
 

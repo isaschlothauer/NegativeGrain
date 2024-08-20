@@ -19,7 +19,7 @@ export default function ContentsLayout({
   const authenticationState : any = useExpirationValidator();
   const router = useRouter();
 
-  console.log("layout", path)
+  // console.log("layout", path)
   // console.log("path from layout", path);
 
   // useEffect(() => {

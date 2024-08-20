@@ -11,6 +11,10 @@ const api = Router()
 .use('/login', loginInputValidation, LoginController)
 .use('/onlineAuthentication', credentialVerificationController)
 .use('/destroyCookie', cookieController)
+.use('/upload', (req, res) => {
+  console.log('test');
+  // console.log(req);
+})
 
 
 

@@ -36,7 +36,7 @@ export const imageData: ImageDataProps[] = [
     id: 3,
     imageDetailInputTitle: 'Lens Make',
     placeholder: 'Nikon', 
-    data: 'lense',
+    data: 'lens',
     type: 'text',
     required: false,
   },

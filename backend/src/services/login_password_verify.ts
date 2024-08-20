@@ -6,7 +6,7 @@ export const loginPasswordVerification = async (username: string, password: stri
 
   // User password hash  
   try {
-    const [rows] = await database.promise().query<passwordDB[]>("SELECT password_hash FROM User WHERE username = ?", [username]);
+    const [rows] = await database.promise().query<passwordDB[]>("SELECT password_hash FROM users WHERE username = ?", [username]);
 
     if (rows.length === 0) {
       console.log("User not found");
