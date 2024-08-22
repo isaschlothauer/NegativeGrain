@@ -18,7 +18,7 @@ interface ImageDataProps {
   flength: string,
   aperture: string,
   filmStock: string,
-  description: string,
+  caption: string,
 }
 
 interface fileDataProps {
@@ -50,7 +50,7 @@ export default function ContentUpload () {
     flength: '',
     aperture: '',
     filmStock: '',
-    description: ''
+    caption: ''
   })
   const [ pageRender, setPageRender ] = useState<boolean>(true);
 

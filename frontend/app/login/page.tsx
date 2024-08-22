@@ -98,6 +98,9 @@ export default function Login () {
     }
     catch (error) {
       console.error(error);
+      setLoginResponseMsg(prevState => {
+        return [...prevState, { messages: "Unable to authenticate username and/or password" }];
+      })
     }
   }
 

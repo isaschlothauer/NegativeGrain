@@ -66,9 +66,9 @@ export const imageData: ImageDataProps[] = [
   },
   {
     id: 7,
-    imageDetailInputTitle: 'Description',
+    imageDetailInputTitle: 'Caption',
     placeholder: '', 
-    data: 'description',
+    data: 'caption',
     type: 'text',
     required: false,
   }

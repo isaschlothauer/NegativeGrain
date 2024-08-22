@@ -48,3 +48,33 @@ export type UserProfileForAuthentication = Omit<NewAccountRegistrationProps, "cP
   iat: number,
   exp: number,
 }
+
+export interface VerifiedUserProps {
+  username: string,
+  firstname: string | undefined,
+  lastname: string | undefined,
+  email: string;
+  created_at: string;
+  iat: number;
+  exp: number;
+}
+
+export interface ImageDataProps {
+  imageTitle: string,
+  brand: string | undefined,
+  camera: string | undefined,
+  lens: string | undefined,
+  flength: string | undefined,
+  aperture: string | undefined,
+  filmStock: string | undefined,
+  caption: string | undefined,
+}
+
+export interface UserID extends RowDataPacket {
+  userID: number;
+}
+
+export interface ServiceReturnResultProps { 
+  success: boolean,
+  messages: Array;
+}
