@@ -31,7 +31,8 @@ interface fileDataProps {
 // Change database table
 
 // Image file format
-const imageMimeType = /image\/(png|jpg|jpeg)/i;
+// const imageMimeType = /image\/(png|jpg|jpeg)/i;
+const imageMimeType = ['image/jpg', 'image/png', 'image/jpeg'];
 
 export default function ContentUpload () {
   const { isLoggedIn } = useContext(UserDataContext);
@@ -51,18 +52,30 @@ export default function ContentUpload () {
     filmStock: '',
     description: ''
   })
+  const [ pageRender, setPageRender ] = useState<boolean>(true);
+
+  const router = useRouter();
 
   // const router = useRouter();
   const inputRef: any = useRef(null);
 
-  // Preview upload function
+  // Preview image function
   function previewSubmit(e: any) {
     e.preventDefault();
 
     const file = e.currentTarget[0].files?.[0];
 
-    if (!file.type.match(imageMimeType)) {
+    // if (!file.type.match(imageMimeType)) {
+    if (!imageMimeType.includes(file.type)) {
       setFileDataError("Invalid image type");
+      setFileData((prevState) => ({
+        ...prevState,
+        fileName: null,
+        imageData: ''
+      }));
+
+      // Clears file name 
+      inputRef.current.value = '';
 
       setTimeout(() => {
         setFileDataError("")
@@ -92,9 +105,9 @@ export default function ContentUpload () {
 
       fileReader.readAsDataURL(fileData.fileName);
     }
-  }, [fileData.fileName]);
+  }, [fileData.fileName, fileData]);
 
-  // Submit
+  // Submit function
   const uploadSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -105,45 +118,40 @@ export default function ContentUpload () {
       try {
         formData.append('imageFile', fileData.fileName); // 'imageFile' is the key under which the file will be sent
       }
-      catch (error) {
+      catch (error: unknown) {
         console.error('FormData append operation failed');
       }
     } else {
       console.error('No fileData');
     }
       
+    // Appending image details to formData
     Object.entries(imageDetails).forEach(([key, value]) => {
       formData.append(key, value);
     })
 
-    formData.forEach((value, key) => {
-      console.log(key, value);
-    });
+    try {
+      await axios.post(`${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_UPLOAD}`,
+        formData,
+        {
+          withCredentials: true
+        }
+      )
+      .then((res) => {
+        console.log("upload success: ", res);
+      })
+    }
+    catch (err: any) {
+      console.error("upload error: ", err)
 
-    // try {
-    //   await axios.post(`${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_UPLOAD}`,
-    //     formData,
-    //     {withCredentials: true}
-    //   )
-    // }
-    // catch (error) {
-    //   console.error("upload error: ", error)
-    // }
+      if (err.response.status === 401) {
+        setPageRender(false);
 
-
-    // TO DO: CREATE AXIOS QUERY
-    // await axios.post(`${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_REGISTER}`,
-    //   image,
-    //   {withCredentials: true,
-    //     headers : {
-    //       'Access-Control-Allow-Origin': '*',
-    //       'Content-Type': 'application/json/fileData.type',
-    //     }
-    //   }
-
-    // )
-
-
+        setTimeout(() => {
+          router.push('/login');
+        }, 2000)
+      }
+    }
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> )  => {
@@ -189,7 +197,7 @@ export default function ContentUpload () {
   return (
     <>
     {isUserLoggedIn?
-        <section>
+      <section>
         <div className={styles.contentUploadContainer}>
           <div className={styles.uploadMain}>
             <p className={styles.uploadTitle}>Image Upload</p>
@@ -213,6 +221,7 @@ export default function ContentUpload () {
               </form>
             :
               fileData.imageData && (
+                pageRender?
               <form encType="multipart/form-data"
                 onSubmit={uploadSubmit}
                 className={styles.uploadForm}
@@ -288,6 +297,8 @@ export default function ContentUpload () {
                 </button>
               </div>
               </form>
+              : 
+              <div className={styles.redirectMsg}>User session expired. Redirecting...</div>
             )
           }
 

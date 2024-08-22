@@ -17,10 +17,6 @@ export const useExpirationValidator = () => {
         try {
           const response: any = await axios.get(`${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_VERIFY}`, 
             {withCredentials: true,
-            headers: {
-              'Access-Control-Allow-Origin': '*', 
-              'Content-Type': 'application/cookie'
-            }
           })
           setAuthResponse(response);
         }

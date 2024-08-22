@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { newAccountValidation } from '../middleware/new_account_validation';
-import { loginInputValidation } from '../middleware/login_inut_validation'
+import { loginInputValidation } from '../middleware/login_input_validation';
+import { authVerification } from '../middleware/auth_verification';
+import uploadController from '../controllers/upload.controller';
 import AccountCreationController from '../controllers/account_creation.controller'
 import LoginController from '../controllers/login.controller'
 import credentialVerificationController from '../controllers/credential.controller'
@@ -9,13 +11,8 @@ import cookieController from '../controllers/cookie.controller'
 const api = Router()
 .use('/accountRegister', newAccountValidation, AccountCreationController)
 .use('/login', loginInputValidation, LoginController)
-.use('/onlineAuthentication', credentialVerificationController)
+.use('/onlineAuthentication', authVerification, credentialVerificationController)
 .use('/destroyCookie', cookieController)
-.use('/upload', (req, res) => {
-  console.log('test');
-  // console.log(req);
-})
-
-
+.use('/upload', authVerification, uploadController)
 
 export default Router().use('/api', api);
