@@ -78,3 +78,11 @@ export interface ServiceReturnResultProps {
   success: boolean,
   messages: Array;
 }
+
+export interface FileNameProps extends RowDataPacket{
+  file_name: string;
+}
+
+export interface ImageIDProps extends RowDataPacket {
+  image_id: number;
+}
