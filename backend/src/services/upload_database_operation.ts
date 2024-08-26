@@ -5,8 +5,9 @@ import { FieldPacket, QueryResult, ResultSetHeader, RowDataPacket } from "mysql2
 
 export const uploadDatabaseOperation = async ({email, fullFileName, imageData} : {email: string, fullFileName: string | undefined, imageData:ImageDataProps}) => {
 
-  const { imageTitle, brand, camera, lens, flength, aperture, filmStock, caption } = imageData;
+  const { imageTitle, cameraBrand, cameraModel, lensBrand, lensModel, flength, aperture, filmStock, caption } = imageData;
 
+  console.log('imgData', imageData);
   // Check for duplicate file name (duplicate file name shouldn't exist, but still checks)
   const [ duplicateFile ] = await database.promise().query<FileNameProps[]>("SELECT file_name FROM image WHERE file_name = ?", [fullFileName]);
 
@@ -18,32 +19,44 @@ export const uploadDatabaseOperation = async ({email, fullFileName, imageData} :
   let userID: number | null = null;
   try {
     const [ user_id, _0] = await database.promise().query<UserID[]>("SELECT id FROM users WHERE email = ?", [email]);
-    userID = user_id[0].id;
+
+    if (user_id[0])
+      userID = user_id[0].id;
+    else
+    return { success: false, messages: ['Operation error: User not found. Contact administrator']};
+
   }
   catch (err: unknown) {
     return { success: false, messages: ['Operation error: Unable to retrieve user id during database operation']};
   };
 
-  let image_id: number | null = null;
+  // let image_id: number | null = null;
+  let imageID: number | undefined;
 
   // image table operation
 
-  // FIX THIS
   try {
     await database.promise().query<ResultSetHeader>("INSERT INTO image (file_name, user_id, created_at) VALUES (?, ?, CURRENT_TIME)", [fullFileName, userID]);
 
-    image_id = await database.promise().query<QueryResult>("SELECT image_id FROM image_data JOIN image ON image_data.image_id = image.id WHERE image.file_name = ?", [fullFileName]);
+    const [imageIDRows] = await database.promise().query<ImageIDProps[]>("SELECT id FROM image WHERE file_name = ?;", [fullFileName])
+
+    if (imageIDRows.length > 0) {
+      imageID = imageIDRows[0].id
+    } else {
+      return { success: false, messages: ['Operation error: Unable to retrieve image id during database operation']};
+    }
   }
   catch (err: unknown) {
     return { success: false, messages: ['Operation error: Unable to commit to image table']};
   };
 
-  // Storing image data into image_data table;
+  // // Storing image data into image_data table;
   try {
-    await database.promise().query<ResultSetHeader>("INSERT INTO image_data (title, camera_brand, camera_model, lens_brand, lens_model, lens_focal_length, lens_aperture, created_at, caption) VALUES ()")
+    await database.promise().query<ResultSetHeader>("INSERT INTO image_data (title, camera_brand, camera_model, lens_brand, lens_model, lens_focal_length, lens_aperture, film_stock, caption, image_id) VALUES (?,  ?,  ?,  ?,  ?,  ?,  ?,  ?,  ?, ?);", [imageTitle, cameraBrand, cameraModel, lensBrand, lensModel, flength, aperture, filmStock, caption, imageID])
   }
   catch (err: unknown) {
-    return { success: false, messages: ['Operation error: Unable to commit to image data table']};
+    console.error(err);
+    return { success: false, messages: [`Operation error: ${err}`]};
 
   }
 

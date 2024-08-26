@@ -61,9 +61,10 @@ export interface VerifiedUserProps {
 
 export interface ImageDataProps {
   imageTitle: string,
-  brand: string | undefined,
-  camera: string | undefined,
-  lens: string | undefined,
+  cameraBrand: string | undefined,
+  cameraModel: string | undefined,
+  lensBrand: string | undefined,
+  lensModel: string | undefined,
   flength: string | undefined,
   aperture: string | undefined,
   filmStock: string | undefined,

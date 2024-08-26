@@ -12,9 +12,10 @@ import ClearButton from '@/app/_components/ClearButton';
 
 interface ImageDataProps {
   imageTitle: string,
-  brand: string,
-  camera: string,
-  lens: string,
+  camerBrand: string,
+  cameraModel: string,
+  lensBrand: string,
+  lensModel: string,
   flength: string,
   aperture: string,
   filmStock: string,
@@ -44,9 +45,10 @@ export default function ContentUpload () {
   const [ fileDataError, setFileDataError] = useState<string | null>()
   const [ imageDetails, setImageDetails ] = useState<ImageDataProps>({
     imageTitle: '',
-    brand: '',
-    camera: '',
-    lens: '',
+    camerBrand: '',
+    cameraModel: '',
+    lensBrand: '',
+    lensModel: '',
     flength: '',
     aperture: '',
     filmStock: '',
@@ -244,7 +246,7 @@ export default function ContentUpload () {
               {/* Image data input fields */}
               {imageData.map((element: any) => {
                 return (
-                  element.id !== 7?
+                  element.id !== 8?
                   <li key={element.id}>
                     <div className={`${styles.inputItemList}`}>
                       <label htmlFor={element.data}>{element.imageDetailInputTitle}</label>
