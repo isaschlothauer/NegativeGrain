@@ -20,12 +20,6 @@ import { useRouter } from 'next/navigation';
 
 const ClearButton = dynamic(() => import('../../_components/ClearButton'))
 
-
-// TODO
-// * Search api routing
-// * Log in
-// * log off
-
 export default function Header () {
   const { isLoggedIn, userData } = useContext(UserDataContext);
   const { isUserLoggedIn, setIsUserLoggedIn } = isLoggedIn;

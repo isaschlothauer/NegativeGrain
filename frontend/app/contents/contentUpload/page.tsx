@@ -12,7 +12,7 @@ import ClearButton from '@/app/_components/ClearButton';
 
 interface ImageDataProps {
   imageTitle: string,
-  camerBrand: string,
+  cameraBrand: string,
   cameraModel: string,
   lensBrand: string,
   lensModel: string,
@@ -25,6 +25,10 @@ interface ImageDataProps {
 interface fileDataProps {
     fileName: File | null,
     imageData: string,
+}
+
+interface ErrorProps {
+  messages: string;
 }
 
 // TODO
@@ -45,7 +49,7 @@ export default function ContentUpload () {
   const [ fileDataError, setFileDataError] = useState<string | null>()
   const [ imageDetails, setImageDetails ] = useState<ImageDataProps>({
     imageTitle: '',
-    camerBrand: '',
+    cameraBrand: '',
     cameraModel: '',
     lensBrand: '',
     lensModel: '',
@@ -55,6 +59,8 @@ export default function ContentUpload () {
     caption: ''
   })
   const [ pageRender, setPageRender ] = useState<boolean>(true);
+  const [ storageOperationOk, setStorageOperationOk ] = useState<boolean>(false);
+  const [ uploadErrorMsg, setUploadErrorMsg ] = useState<ErrorProps[]>([]);
 
   const router = useRouter();
 
@@ -140,7 +146,13 @@ export default function ContentUpload () {
         }
       )
       .then((res) => {
-        console.log("upload success: ", res);
+        if (res.status === 200) {
+          setStorageOperationOk(true);
+
+          setTimeout(() => {
+            router.push('/contents');
+          }, 1300)
+        }
       })
     }
     catch (err: any) {
@@ -185,9 +197,9 @@ export default function ContentUpload () {
     // CLear fileData state
     if (fileData.fileName) {
       setFileData((prevState) => ({
-      ...prevState,
-      fileName: null
-    }))
+        ...prevState,
+        fileName: null
+      }))
     } else {
       setFileData((prevState) => ({
         ...prevState,
@@ -196,10 +208,21 @@ export default function ContentUpload () {
     }
   }
 
+  const responseTextRender = () => {
+    return (
+      <ul className={styles.errorMsgsUL}>
+        {uploadErrorMsg.map((element, index) => (
+          <li key={index} className={styles.errorMsgList}>* {element.messages}</li>
+        ))}
+      </ul>
+    )
+  }
+
   return (
     <>
     {isUserLoggedIn?
       <section>
+        {!storageOperationOk? 
         <div className={styles.contentUploadContainer}>
           <div className={styles.uploadMain}>
             <p className={styles.uploadTitle}>Image Upload</p>
@@ -240,7 +263,8 @@ export default function ContentUpload () {
                     />
                   </div>
                 </div>
-
+              
+              {}
               <ul className={styles.imageDetailList}>
 
               {/* Image data input fields */}
@@ -284,6 +308,7 @@ export default function ContentUpload () {
                 )
               })}
               </ul>
+              {responseTextRender()}
               <div className={styles.submitCancelButtonContainer}>
                 <button
                   className={styles.uploadSubmitButton}
@@ -309,6 +334,11 @@ export default function ContentUpload () {
 
           </div>
         </div>
+        
+        : 
+          <div className={styles.uploadSuccessMsg}>Upload successful</div>
+        }
+        
       </section>
     :
       <div>Loading</div>}

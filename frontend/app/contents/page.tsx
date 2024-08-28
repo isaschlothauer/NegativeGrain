@@ -3,21 +3,23 @@
 import {useContext, ReactNode, useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { UserDataContext } from '../context/userContext';
+import ImageDisplayPanel from '../_components/ImageDisplayPanel';
 import styles from './page.module.css'
 
 export default function Contents () {
   const { isLoggedIn, currentPath } = useContext(UserDataContext);
   const { isUserLoggedIn } = isLoggedIn;
-  const { path, setPath } = currentPath;
-  const pathname = usePathname();
 
-  useEffect(() => {
-    if (pathname != undefined || pathname !== path)
-      setPath(pathname);
+  
+  // const { path, setPath } = currentPath;
+  // const pathname = usePathname();
 
-  }, [pathname, path, setPath])
- 
-  console.log(path)
+  // useEffect(() => {
+  //   if (pathname != undefined || pathname !== path)
+  //     setPath(pathname);
+
+  // }, [pathname, path, setPath])
+
 
   const mainContents = (): ReactNode => {
       return (
@@ -26,7 +28,7 @@ export default function Contents () {
           Loading...
         </>
         ) : (
-        <div>Hello</div>
+          <ImageDisplayPanel />
         )
       )  
     }

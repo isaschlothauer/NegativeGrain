@@ -37,13 +37,15 @@ router.post('/', upload.single('imageFile'), async (req: Request, res: Response)
   const { email } = verifiedUser as VerifiedUserProps;
 
   const imageData: ImageDataProps = req.body;
-  const uploaded: Promise<boolean | undefined | ServiceReturnResultProps> = uploadDatabaseOperation({ email, fullFileName, imageData })
+  const uploaded = await uploadDatabaseOperation({ email, fullFileName, imageData })
   
 
   console.log("uploaded: ", uploaded);
 
-
-  res.status(200); 
-})
+  if (uploaded.success === true) 
+    return res.status(200).send(uploaded);
+  else
+    return res.status(500).send({ success: false, messages: ['Server error: Unable to perform database operation']});
+  })
 
 export default router;

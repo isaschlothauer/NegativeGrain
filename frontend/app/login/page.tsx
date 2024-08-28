@@ -34,10 +34,6 @@ export default function Login () {
 
   const router = useRouter();
   const authenticationState : any = useExpirationValidator();
-
-  // Sets isUserLoggedIn context
-  // console.log("login page", authenticationState)
-  // LoginStateSetter(authenticationState)
   
   // Input handler
   const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
