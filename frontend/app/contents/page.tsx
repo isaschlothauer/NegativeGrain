@@ -10,6 +10,7 @@ export default function Contents () {
   const { isLoggedIn, currentPath } = useContext(UserDataContext);
   const { isUserLoggedIn } = isLoggedIn;
 
+
   
   // const { path, setPath } = currentPath;
   // const pathname = usePathname();
@@ -38,7 +39,6 @@ export default function Contents () {
       <section className={styles.contentsContainer}>
         <div className={styles.contentMain}>
           {mainContents()}
-
         </div>
       </section>
     </>

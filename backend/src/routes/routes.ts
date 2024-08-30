@@ -7,6 +7,7 @@ import AccountCreationController from '../controllers/account_creation.controlle
 import LoginController from '../controllers/login.controller'
 import credentialVerificationController from '../controllers/credential.controller'
 import cookieController from '../controllers/cookie.controller'
+import ImageFeedController from '../controllers/image_feed.controller'
 
 const api = Router()
 .use('/accountRegister', newAccountValidation, AccountCreationController)
@@ -14,5 +15,6 @@ const api = Router()
 .use('/onlineAuthentication', authVerification, credentialVerificationController)
 .use('/destroyCookie', cookieController)
 .use('/upload', authVerification, uploadController)
+.use('/imageFeed', ImageFeedController)
 
 export default Router().use('/api', api);
