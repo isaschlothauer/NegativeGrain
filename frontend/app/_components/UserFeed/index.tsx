@@ -1,4 +1,4 @@
-export default function UserRecentFeed () {
+export default function NewestFeed () {
   return (
     <>
       User Feed

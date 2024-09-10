@@ -1,3 +1,6 @@
+import express from 'express';
+import path from 'path';
+
 import { Router } from 'express';
 import { newAccountValidation } from '../middleware/new_account_validation';
 import { loginInputValidation } from '../middleware/login_input_validation';
@@ -16,5 +19,7 @@ const api = Router()
 .use('/destroyCookie', cookieController)
 .use('/upload', authVerification, uploadController)
 .use('/imageFeed', ImageFeedController)
+// .use('/imageFeed', ImageFeedController)
+// .use('/images', express.static(path.join(__dirname, 'src/image_storage'))); // Test
 
 export default Router().use('/api', api);
