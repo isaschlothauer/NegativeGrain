@@ -16,7 +16,7 @@ export default function ImageDisplayPanel() {
   // FUTURE FUNCTIONALITY CONSIDERATION: Add isUserFeed column in user table to make user choice persistent
 
   // User or discovery feed mode selector (true: )
-  const [ feedMode, setFeedMode ] = useState<string | null>('newest');
+  const [ feedMode, setFeedMode ] = useState<string | null>('1');
 
   useEffect(() => {
     // const fetchedImageData = async () => {
@@ -45,12 +45,12 @@ export default function ImageDisplayPanel() {
       <div className={styles.feedMode}>
       <Tabs value={feedMode} onChange={setFeedMode}>
         <Tabs.List>
-          <Tabs.Tab value="newest" style={{ fontSize: 24}}>Newest Feed</Tabs.Tab>
-          <Tabs.Tab value="user" style={{ fontSize: 24}}>User Feed</Tabs.Tab>
+          <Tabs.Tab value='1' style={{ fontSize: 24}}>Newest Feed</Tabs.Tab>
+          <Tabs.Tab value='2' style={{ fontSize: 24}}>User Feed</Tabs.Tab>
         </Tabs.List>
 
-        <Tabs.Panel value="newest"><NewestFeed /></Tabs.Panel>
-        <Tabs.Panel value="user"><UserFeed /></Tabs.Panel>
+        <Tabs.Panel value='1'><NewestFeed /></Tabs.Panel>
+        <Tabs.Panel value='2'><UserFeed /></Tabs.Panel>
       </Tabs>
       </div>
     </>

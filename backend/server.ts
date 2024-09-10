@@ -15,7 +15,6 @@ app.use(cookieParser());
 app.use( cors(corsOptions) );
 app.use(express.json());
 
-
 // Database connection attempts
 database.getConnection((err, connection) => {
   if (err) {
