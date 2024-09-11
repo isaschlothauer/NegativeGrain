@@ -20,6 +20,8 @@ router.post('/', async (req: Request, res: Response) => {
       storage_url: imageStoragePath
     }))
 
+    console.log(updatedImageArray);
+
     return res.status(200).send({ access: true, message: ['Newest image feed data retrieval successful'], storage_path: updatedImageArray});
   }
   catch (error: unknown) {

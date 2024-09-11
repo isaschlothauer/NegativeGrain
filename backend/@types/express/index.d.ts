@@ -92,5 +92,13 @@ export interface NewestFeedProps extends RowDataPacket {
     id: number;
     file_name: string,
     created_at: Date,
-    storage_url?: string
+    storage_url?: string,
+    camera_brand: string,
+    camera_model: string,
+    lens_brand: string,
+    lens_model: string,
+    lens_focal_length: string,
+    lens_aperture: string,
+    film_stock: string,
+    caption: string
   }

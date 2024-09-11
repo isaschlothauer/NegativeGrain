@@ -8,11 +8,19 @@ import UserFeed from '../UserFeed';
 
 import FetchFeedData from '../../_services/FetchFeedData';
 
-interface imageFeedArrayProps {
-  created_at: Date,
+export interface imageFeedArrayProps {
+  id: number;
   file_name: string,
-  id: number, 
-  storage_url: string
+  created_at: Date,
+  storage_url?: string,
+  camera_brand: string,
+  camera_model: string,
+  lens_brand: string,
+  lens_model: string,
+  lens_focal_length: string,
+  lens_aperture: string,
+  film_stock: string,
+  caption: string
 }
 
 export default function ImageDisplayPanel() {
@@ -39,8 +47,8 @@ export default function ImageDisplayPanel() {
           <Tabs.Tab value='2' style={{ fontSize: 24}}>User Feed</Tabs.Tab>
         </Tabs.List>
 
-        <Tabs.Panel value='1'><NewestFeed /></Tabs.Panel>
-        <Tabs.Panel value='2'><UserFeed /></Tabs.Panel>
+        <Tabs.Panel value='1'><NewestFeed imageData={imageFeedArray} /></Tabs.Panel>
+        <Tabs.Panel value='2'><UserFeed imageData={imageFeedArray}/></Tabs.Panel>
       </Tabs>
       </div>
     </>

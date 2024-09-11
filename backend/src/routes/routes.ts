@@ -20,5 +20,5 @@ const api = Router()
 .use('/destroyCookie', cookieController)
 .use('/upload', authVerification, uploadController)
 .use('/imageFeed', ImageFeedController)
-
+.use('/image_storage', express.static(path.join(__dirname, '../../src/image_storage')));
 export default Router().use('/api', api);
