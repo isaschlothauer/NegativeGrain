@@ -89,6 +89,8 @@ export interface ImageIDProps extends RowDataPacket {
 }
 
 export interface NewestFeedProps extends RowDataPacket {
+    id: number;
     file_name: string,
-    created_at: Date
+    created_at: Date,
+    storage_url?: string
   }

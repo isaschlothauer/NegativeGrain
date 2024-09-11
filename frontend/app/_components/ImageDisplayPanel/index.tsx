@@ -1,6 +1,5 @@
 import styles from './index.module.css';
-import { ReactNode, useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 import { Tabs } from '@mantine/core';
 
@@ -9,37 +8,28 @@ import UserFeed from '../UserFeed';
 
 import FetchFeedData from '../../_services/FetchFeedData';
 
+interface imageFeedArrayProps {
+  created_at: Date,
+  file_name: string,
+  id: number, 
+  storage_url: string
+}
+
 export default function ImageDisplayPanel() {
-  const [ imageFeedArray, setImageFeedArray ] = useState<any>();
-  const [ fetchedData, setFetchedData ] = useState<any>();
+  const [ imageFeedArray, setImageFeedArray ] = useState<imageFeedArrayProps[]>([]);
 
-  // FUTURE FUNCTIONALITY CONSIDERATION: Add isUserFeed column in user table to make user choice persistent
-
-  // User or discovery feed mode selector (true: )
+  // User or newest feed mode selector: 1 (newest), 2 (user preference)
   const [ feedMode, setFeedMode ] = useState<string | null>('1');
 
   useEffect(() => {
-    // const fetchedImageData = async () => {
-    //   try {
-    //     const response: any = await axios.get(`${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_IMAGE_FEED}`, 
-    //       {withCredentials: true,
-    //     })
-    //     setTestArr(response);
-    //   }
-    //   catch (error: any) {
-    //     // Debug console
-    //     setTestArr(error);
-    //   }
-
-    // }
-    // fetchedImageData();
-    const testValue = FetchFeedData(feedMode);
-    setFetchedData(testValue);
-
-    
+    const imageDataFetch = async () => {
+      const imageData = await FetchFeedData(feedMode);
+      setImageFeedArray(imageData.data.storage_path);
+    }
+    imageDataFetch()
   }, [feedMode])
-  console.log("test console on ImageDisplayPanel: ", fetchedData);
 
+  console.log(imageFeedArray)
   return (
     <>
       <div className={styles.feedMode}>
