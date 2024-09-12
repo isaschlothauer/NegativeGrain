@@ -12,8 +12,8 @@ const app: Express = express();
 
 const B_PORT: number = parseInt(process.env.B_PORT || "5001");
 app.use(cookieParser());
-// app.use( cors(corsOptions) );
-app.use( cors() );
+app.use( cors(corsOptions) );
+// app.use( cors() );
 
 app.use(express.json());
 

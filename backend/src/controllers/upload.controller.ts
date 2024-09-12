@@ -5,6 +5,7 @@ import { jwtVerification } from '../services/jwt_services'
 import { JwtPayload } from 'jsonwebtoken';
 import { VerifiedUserProps, ImageDataProps, ServiceReturnResultProps } from '../../@types/express/index';
 import { uploadDatabaseOperation } from '../services/upload_database_operation';
+import sharp from 'sharp';
 
 // File name
 let fullFileName: string | undefined = '';
@@ -21,8 +22,8 @@ const storage = multer.diskStorage({
   }
 });
 
+// Multer
 const upload = multer({ storage: storage })
-
 const router = Router();
 
 router.post('/', upload.single('imageFile'), async (req: Request, res: Response) => {
@@ -33,14 +34,27 @@ router.post('/', upload.single('imageFile'), async (req: Request, res: Response)
     return res.status(401).send({ success: false, messages: 'Unable to verify user'})
   }
 
+  try {
+    if (!req.file != true) {
+      sharp(req.file.path).resize(250, 250).toFile('src/image_storage/thumbnails/' + 'tn-' + fullFileName, (err, resizeImage) => {
+        if (err) {
+            console.error(err);
+        } 
+      })
+    }
+  }
+  catch (error: unknown) {
+    console.error("Thumbnail generation failed");
+
+    return res.status(500).send({ success: false, messages: ['Server error: Unable to generate thumbnail']})
+    
+  }
+
   // For user identifier in user table
   const { email } = verifiedUser as VerifiedUserProps;
 
   const imageData: ImageDataProps = req.body;
   const uploaded = await uploadDatabaseOperation({ email, fullFileName, imageData })
-  
-
-  console.log("uploaded: ", uploaded);
 
   if (uploaded.success === true) 
     return res.status(200).send(uploaded);

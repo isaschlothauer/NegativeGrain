@@ -15,8 +15,13 @@ export default function NewestImageFeed ({ imageData } : NewestImageFeedProps) {
           <div>
             <Image
               src={`${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_IMAGE_STORAGE}/${item.file_name}`}
-              width={500}
-              height={500}
+              sizes="100vw"
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              width={0}
+              height={0}
               alt="Picture of the author"
             />
           </div>
