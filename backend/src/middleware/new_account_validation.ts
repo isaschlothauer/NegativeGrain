@@ -13,11 +13,16 @@ export const newAccountValidation = async (req: Request, res: Response, next: Ne
     }),
     firstname: Joi.string()
     .max(50)
+    .allow('')
+    .optional()
     .messages({
       "string.max": "Firstname must be less than 50 characters"
-    }),
+    })
+    .optional(),
     lastname: Joi.string()
     .max(50)
+    .allow('')
+    .optional()
     .messages({
       "string.max": "Lastname must be less than 50 characters"
     }),
@@ -38,14 +43,20 @@ export const newAccountValidation = async (req: Request, res: Response, next: Ne
   })
 
   try {
-    const value = await schema.validateAsync(req.body, { abortEarly: false });
+    await schema.validateAsync(req.body, { abortEarly: false });
+
+    // Lower case first and last name
+    req.body['firstname'] = req.body['firstname'].toLowerCase();
+    req.body['lastname'] = req.body['lastname'].toLowerCase();
 
     // Removing passwordConfirm
     delete req.body['cPassword'];
-    // res.status(200).send({ success: true, message: "validation passed"});
+    
     next();
   } catch (err: any) {
     const errorDetails = await err.details.map((detail: {message: string})  => detail.message)
+
+    console.log(errorDetails);
 
     // console.log(errorDetails)
     return res.status(400).json({success: false, errors: errorDetails});

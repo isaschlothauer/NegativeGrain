@@ -10,6 +10,7 @@ router.post('/', async (req: Request, res: Response) => {
 
   const { username, email }: NewAccountRegistrationProps = req.body;
 
+  
   let users: boolean;
 
   // Return error if email or username is undefined

@@ -1,0 +1,44 @@
+.imageModal {
+  max-width: 90vw; 
+  max-height: 90vh; 
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageDetails {
+  display: flex;
+}
+
+.imageContainer {
+  min-width: 20%;
+}
+
+.modalImage {
+  
+  max-width: 100%;  
+  max-height: 100%; 
+  object-fit: contain; 
+}
+
+.modalImageDetails {
+  display: flex
+}
+
+.modalImageDateContainer {
+  display: flex;
+}
+
+.modalImageDate {
+  margin-left: auto;
+  font-size: 0.8em;
+}
+
+.iconStyles {
+  margin-left: auto;
+}
+
+.favoriteIconContainer {
+  margin-left: auto;
+}

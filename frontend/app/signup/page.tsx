@@ -126,7 +126,7 @@ export default function SignUp () {
 
     setNewUserData((prevState) => ({
       ...prevState,
-      [name]: value.toLowerCase().trim()
+      [name]: value.trim()
     }));
   }
   

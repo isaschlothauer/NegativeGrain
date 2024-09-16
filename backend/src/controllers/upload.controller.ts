@@ -36,7 +36,7 @@ router.post('/', upload.single('imageFile'), async (req: Request, res: Response)
 
   try {
     if (!req.file != true) {
-      sharp(req.file.path).resize(250, 250).toFile('src/image_storage/thumbnails/' + 'tn-' + fullFileName, (err, resizeImage) => {
+      sharp(req.file.path).resize(500, 500).toFile('src/image_storage/thumbnails/' + 'tn-' + fullFileName, (err, resizeImage) => {
         if (err) {
             console.error(err);
         } 

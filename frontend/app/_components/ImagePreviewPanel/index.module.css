@@ -1,0 +1,15 @@
+.thumbnail {
+  background-color: rgba(0,0,0,0);
+}
+
+.clickableThumbnail {
+  background-color: rgba(179, 179, 179, 0.2);
+}
+
+.imagePanel {
+  padding: 0 0.2em;
+  margin-top: -0.3em;
+}
+
+
+

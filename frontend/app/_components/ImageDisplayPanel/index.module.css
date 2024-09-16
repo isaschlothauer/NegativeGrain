@@ -1,4 +1,21 @@
 .feedModeTab {
-  border: 1px dotted green;
+  /* border: 1px dotted green; */
   /* height: calc(100vh - 60px); */
+}
+
+.imagePanelContainer {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  padding: 0 1em;
+}
+
+@media only screen and (min-width: 400px) {
+  .imagePanelContainer {
+    margin-bottom: initial;
+    display: grid;
+    gap: 0.4em;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); 
+    justify-content: start; 
+    width: 100%; 
+  }
 }

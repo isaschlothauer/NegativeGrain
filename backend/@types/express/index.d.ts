@@ -90,8 +90,10 @@ export interface ImageIDProps extends RowDataPacket {
 
 export interface NewestFeedProps extends RowDataPacket {
     id: number;
+    username: string;
     file_name: string,
     created_at: Date,
+    title: string,
     storage_url?: string,
     camera_brand: string,
     camera_model: string,
