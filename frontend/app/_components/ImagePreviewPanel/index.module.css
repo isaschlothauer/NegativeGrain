@@ -2,6 +2,10 @@
   background-color: rgba(0,0,0,0);
 }
 
+.modalStyle {
+  margin-top: 1em;
+}
+
 .clickableThumbnail {
   background-color: rgba(179, 179, 179, 0.2);
 }

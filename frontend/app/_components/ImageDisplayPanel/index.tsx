@@ -14,6 +14,7 @@ export interface ImageFeedArrayProps {
   username: string,
   file_name: string,
   title: string,
+  location: string,
   created_at: Date,
   storage_url?: string,
   camera_brand: string,
@@ -72,9 +73,6 @@ export default function ImageDisplayPanel() {
         ))}
       </>
     )
-
-    return true;
-
   }
 
   console.log(imageFeedArray)
@@ -94,8 +92,6 @@ export default function ImageDisplayPanel() {
           {/* <ImagePreviewPanel /> */}
           {imageFeedPanel(imageFeedArray)}
         </div>
-
-
       </div>
     </section>
   )

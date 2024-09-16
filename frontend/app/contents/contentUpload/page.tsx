@@ -12,6 +12,7 @@ import ClearButton from '@/app/_components/ClearButton';
 
 interface ImageDataProps {
   imageTitle: string,
+  location: string,
   cameraBrand: string,
   cameraModel: string,
   lensBrand: string,
@@ -49,6 +50,7 @@ export default function ContentUpload () {
   const [ fileDataError, setFileDataError] = useState<string | null>()
   const [ imageDetails, setImageDetails ] = useState<ImageDataProps>({
     imageTitle: '',
+    location: '',
     cameraBrand: '',
     cameraModel: '',
     lensBrand: '',
@@ -162,7 +164,7 @@ export default function ContentUpload () {
         setPageRender(false);
 
         setTimeout(() => {
-          router.push('/login');
+          router.push('/signoff');
         }, 2000)
       }
     }

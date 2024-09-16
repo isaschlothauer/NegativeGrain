@@ -99,7 +99,6 @@ export default function SignUp () {
       // Message and redirect delay. 2 sec
       setTimeout(() => {
         setValidationResponse([]); // Clear validation messages
-        // RE-ENABLE IT
         console.log("Enable account creation redirect")
         router.push('/')
       }, 2000)

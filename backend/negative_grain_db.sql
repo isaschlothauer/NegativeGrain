@@ -63,6 +63,7 @@ CREATE TABLE `image_data` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `caption` varchar(1000) DEFAULT NULL,
   `film_stock` varchar(255) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_Image_data` (`image_id`),
   CONSTRAINT `FK_Image_data` FOREIGN KEY (`image_id`) REFERENCES `image` (`id`)
@@ -146,4 +147,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2024-08-26 11:07:19
+-- Dump completed on 2024-09-16 21:53:49

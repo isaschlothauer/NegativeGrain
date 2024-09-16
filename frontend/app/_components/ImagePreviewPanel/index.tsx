@@ -21,7 +21,7 @@ export default function ImagePreviewPanel ({imageData} : {imageData: ImageFeedAr
           title={imageData.title}
           transitionProps={{ transition: 'fade', duration: 200 }}
           fullScreen={true}
-          className={styles.modal}
+          className={styles.modalStyle}
         >
           {imageModal(imageData)}
         </Modal>

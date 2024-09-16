@@ -1,14 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { ImageFeedArrayProps } from '../ImageDisplayPanel'
-import styles from './index.module.css'
-import DateFormatter from '../../_services/DateFormatConverter'
-import Clipboard from '../../../public/icons/clipboard.png'
-import ClipboardCheck from '../../../public/icons/clipboard-check.png'
-
+import { ImageFeedArrayProps } from '../ImageDisplayPanel';
+import styles from './index.module.css';
+import DateFormatter from '../../_services/DateFormatConverter';
+import Clipboard from '../../../public/icons/clipboard.png';
+import ClipboardCheck from '../../../public/icons/clipboard-check.png';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 export const imageModal = (fileData: ImageFeedArrayProps) => {
   const imageFileName: string = fileData['file_name'].replace('tn-', '');
+
+  const router = useRouter();
 
   // Favorite icon trigger color
   const [ favorite, setFavorite ] = useState<boolean>(false);
@@ -16,6 +19,29 @@ export const imageModal = (fileData: ImageFeedArrayProps) => {
   // Date reformat
   const datePosted = DateFormatter(fileData.created_at as Date);
 
+  useEffect(() => {
+    const favTrigger = async () => {
+
+      try {
+        
+        await axios.post(`${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_FAVORITE}`,
+          { favorite },
+          {
+            withCredentials: true
+          }
+        )
+      }
+      catch (err: any) {
+        console.error("fTrigger error: ", err.response.status);
+
+        if (err.response.status == 401) {
+          router.push('/signoff')
+        }
+      }
+    }
+
+    favTrigger();
+  }, [favorite]);
 
   const linkedIconTrigger = () => {
     const imageSrc = favorite ? ClipboardCheck : Clipboard;  
@@ -24,6 +50,7 @@ export const imageModal = (fileData: ImageFeedArrayProps) => {
         role='button'
         onClick={() => setFavorite((prevState) => !prevState)} 
         className={styles.favoriteIconContainer}
+        
       >
         <Image
           src={imageSrc}

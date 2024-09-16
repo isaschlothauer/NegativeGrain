@@ -94,6 +94,7 @@ export interface NewestFeedProps extends RowDataPacket {
     file_name: string,
     created_at: Date,
     title: string,
+    location: string;
     storage_url?: string,
     camera_brand: string,
     camera_model: string,

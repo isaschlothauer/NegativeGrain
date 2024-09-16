@@ -56,7 +56,7 @@ export default function Header () {
     // If not authorized, redirect to the landing page
     useEffect(() => {
       if (isSignOffTriggerOn == true) {
-        router.push('/');
+        router.push('/signoff');
         setIconToggleMenu(false);
       }
     })

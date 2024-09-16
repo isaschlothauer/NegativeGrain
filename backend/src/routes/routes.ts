@@ -11,7 +11,7 @@ import LoginController from '../controllers/login.controller'
 import credentialVerificationController from '../controllers/credential.controller'
 import cookieController from '../controllers/cookie.controller'
 import ImageFeedController from '../controllers/image_feed.controller'
-import { imageData } from '../../../frontend/app/contents/contentUpload/uploadInputItem';
+
 
 const api = Router()
 .use('/accountRegister', newAccountValidation, AccountCreationController)
@@ -20,5 +20,9 @@ const api = Router()
 .use('/destroyCookie', cookieController)
 .use('/upload', authVerification, uploadController)
 .use('/imageFeed', ImageFeedController)
-.use('/image_storage', express.static(path.join(__dirname, '../../src/image_storage')));
+.use('/image_storage', express.static(path.join(__dirname, '../../src/image_storage')))
+.use('/favoriteTrigger', authVerification, (req, res)=> {
+  console.log("routes: ", req.body);
+})
+;
 export default Router().use('/api', api);

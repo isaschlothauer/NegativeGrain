@@ -26,7 +26,7 @@ export default function LoggedInDropDownMenuWide ({ setIconToggleMenu }: LoggedI
   // If not authorized, redirect to the landing page
   useEffect(() => {
     if (isSignOffTriggerOn == true) {
-      router.push('/');
+      router.push('/signoff');
       setIconToggleMenu(false);
     }
   })
