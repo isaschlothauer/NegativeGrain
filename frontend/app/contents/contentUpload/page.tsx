@@ -164,7 +164,7 @@ export default function ContentUpload () {
         setPageRender(false);
 
         setTimeout(() => {
-          router.push('/signoff');
+          router.push('/');
         }, 2000)
       }
     }

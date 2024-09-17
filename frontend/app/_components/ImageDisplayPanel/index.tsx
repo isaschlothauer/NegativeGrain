@@ -89,7 +89,6 @@ export default function ImageDisplayPanel() {
 
         {/* Image feed section */}
         <div className={styles.imagePanelContainer}>
-          {/* <ImagePreviewPanel /> */}
           {imageFeedPanel(imageFeedArray)}
         </div>
       </div>

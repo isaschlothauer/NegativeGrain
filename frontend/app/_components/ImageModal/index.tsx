@@ -35,7 +35,7 @@ export const imageModal = (fileData: ImageFeedArrayProps) => {
         console.error("fTrigger error: ", err.response.status);
 
         if (err.response.status == 401) {
-          router.push('/signoff')
+          router.push('/')
         }
       }
     }
