@@ -1,0 +1,151 @@
+.signUp {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backgroundImage {
+  position: absolute;
+  display: flex;
+  width: 100vw;
+  margin: 0 auto;
+  opacity: 0.9;
+  height: calc(100vh - 60px);
+}
+
+.pageContainer {
+  z-index: 1;
+  position: absolute;
+  /* top: 200%; */
+  left: 50vw;
+  transform:translate(-50% );
+  width: 100vw;
+}
+
+.accountRegstrationTitle {
+  font-size: 1.3em;
+}
+
+.loginContainer {
+  background-color: var(--bgColor);
+  max-width: 15em;
+  margin: 0 auto;
+  border-radius: 0.2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em 0;
+}
+
+.regItemList {
+  list-style-type: none;
+  padding: 1em;
+  padding-bottom: 0.2em;
+}
+
+.inputItemList {
+  margin: 0.5em 0;
+  display: flex;
+}
+
+.inputItemList > * {
+  display: block;
+}
+
+.inputItemList > label {
+  width: 3em;
+  color: var(--fontColor);
+  font-size: 0.9em;
+}
+
+.inputFieldStyle {
+  height: 1em;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+  padding: 0 0.3em;
+}
+
+.requiredMark {
+  color: var(--linkColor)
+}
+
+.submitButton {
+  width: 3em;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+  align-self: center;
+  margin-bottom: 0.5em;
+  font-size: 0.9em;
+}
+
+.submitButton {
+  width: 3em;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+  align-self: center;
+  margin-bottom: 0.5em;
+  font-size: 0.9em;
+}
+
+.textNewAccount {
+  color: var(--fontColor);
+  font-size: 0.9em;
+}
+
+.textNewAccountLink {
+  text-decoration: none;
+  color: var(--fontColor);
+}
+
+.clearButton {
+  height: 0.6em;
+  width: 0.6em;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0.2;
+  margin-left: -1em;
+  margin-top: 0.3em;
+  font-size: 0.8em;
+}
+
+.errorMsgsUL {
+  list-style-type: none;
+  display: block;
+}
+
+.errorMsgList {
+  font-size: 0.8em;
+  color: var(--ErrorTextColor);
+  text-align: center;
+}
+
+@media only screen and (min-width: 770px) {
+  .mainPageContainer {
+    width: 70%;
+    align-content: center;
+  }
+
+  .userDataInputComponents {
+    top: 160%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .noAuthLandingPage {
+    padding: 0;
+  }
+
+  .landingText {
+    padding: 0 0.3em;
+  }
+}

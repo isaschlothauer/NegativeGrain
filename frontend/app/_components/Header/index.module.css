@@ -1,0 +1,218 @@
+.headerContainer {
+  position: relative;
+  width: 100vw;
+}
+
+.headerMainSection {
+  display: flex;
+  padding: 1em 4% 0.5em 4%;
+  /* padding-top: 1em; */
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  margin: auto;
+}
+
+.headerTitle {
+  font-size: 0.9em;
+  color: var(--fontColor);
+  text-decoration: none;
+  margin: auto;
+}
+
+.headerText {
+  font-size: 0.9em;
+  display: flex;
+}
+
+.headerMenu {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  width: 100vw;
+  margin: auto;
+}
+
+.dropDownMenuItem {
+  color: var(--fontColor);
+}
+
+.loginLinkStyleContainer {
+  display: none;
+  height: 1em;
+  list-style-type: none;
+}
+
+.dropDownMenu {
+  /* border: 1px dotted green; */
+  width: 100vw;
+  position: absolute;
+  /* height: 90vh; */
+  height: calc(100% - 60px);
+  height: -o-calc(100% - 60px); /* opera */
+  height: -webkit-calc(100% - 60px); /* google, safari */
+  height: -moz-calc(100% - 60px); /* firefox */
+  animation: fadeIn 0.7s;
+  background-color: white;
+  z-index: 10;
+}
+
+.uList {
+  width: 100%;  
+}
+
+.uList > li {
+  margin: 0.5em 0;
+}
+
+.listItemSearch {
+
+  height: 1em;
+  padding: 0 0.2em;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
+
+.listItem {
+  text-align: center;
+}
+
+.NavListWithSearchClear {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.listWithSearchClear {
+  width: 100%;
+  justify-content: center;
+}
+
+.searchForm {
+  display: flex;
+}
+
+.clearButton {
+  height: 0.6em;
+  width: 0.6em;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0.2;
+  margin-left: -1em;
+  margin-top: 0.3em;
+  font-size: 0.8em;
+}
+
+.buttonAdjust {
+  margin-top: 0.3em;
+}
+
+.searchButton {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.searchButtonNavMenu {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  height: 0.9em;
+  opacity: 0.5;
+  margin-left: 0.4em;
+}
+
+.searchButtonDropDown {
+  margin-left: 0.3em;
+  margin-top: 0.2em;
+  opacity: 0.5
+}
+
+.userInfo {
+  text-align: center;
+  margin: auto;
+}
+
+.userInfo > * {
+  line-height: 0.6;
+  font-size: 0.9em;
+}
+
+.userInfoUserName {
+  font-size: 1.2em;
+}
+
+.loginLInk {
+  width: 2em;
+}
+
+.iconStyle {
+  border: none;
+  background-color: rgba(0, 0, 0, 0)
+}
+
+.iconContainer {
+  border: 1px dotted red;
+}
+
+.signOutButton {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  margin: auto;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0;}
+  100% { opacity: 1; }
+}
+
+@media only screen and (min-width: 770px) {
+  .headerMenu {
+    display: none
+  }
+
+  .headerTitle {
+    margin: 0;
+  }
+
+  .navList {
+    flex: 1;
+  }
+
+  .loginLinkStyleContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: -0.14em;
+    gap: 0.6em;
+  }
+
+  .searchInput {
+    display: flex;
+    border: 0;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    height: 0.9em;
+    width: 8em;
+    padding: 0 0.3em;
+  }
+
+  .loginLInk {
+    display: flex;
+    text-decoration: none;
+    font-size: 0.8em;
+  }
+
+  .dropDownMenu {
+    display: none;
+  }
+    
+}
+
+@media only screen and (min-width: 1200px) {
+  .headerMainSection {
+    /* padding: 0; */
+  }
+  
+}

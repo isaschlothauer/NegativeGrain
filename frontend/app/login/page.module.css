@@ -1,0 +1,106 @@
+.loginContainer {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backgroundImage {
+  position: absolute;
+  display: flex;
+  width: 100vw;
+  margin: 0 auto;
+  opacity: 0.9;
+  height: calc(100vh - 60px);
+}
+
+.loginFormContainer {
+  position: absolute;
+  background-color: var(--bgColor);
+  width: 15em;
+  border-radius: 0.2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 1em;
+  justify-content: center;
+}
+
+.listItem {
+  margin: 0.5em 0;
+}
+
+.loginItemList {
+  list-style-type: none;
+  padding: 0em;
+  flex-direction: column;
+}
+
+.loginComponentTitle {
+  font-size: 1.3em;
+}
+
+.inputItemList {
+  display: flex;
+}
+
+.inputItemList > label {
+  width: 3em;
+  color: var(--fontColor);
+  font-size: 0.9em;
+}
+
+.inputFieldStyle {
+  height: 1em;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+  padding: 0 0.3em;
+}
+
+.submitButton {
+  width: 3em;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+  align-self: center;
+  margin-bottom: 0.5em;
+  font-size: 0.9em;
+}
+
+.textNewAccount {
+  color: var(--fontColor);
+  font-size: 0.9em;
+}
+
+.textNewAccountLink {
+  text-decoration: none;
+  color: var(--linkColor);
+}
+
+.clearButton {
+  height: 0.6em;
+  width: 0.6em;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0.2;
+  margin-left: -0.8em;
+  margin-top: 0.3em;
+  font-size: 0.8em;
+}
+
+.errorMsgsUL {
+  list-style-type: none;
+  display: block;
+}
+
+.errorMsgList {
+  font-size: 0.8em;
+  color: var(--ErrorTextColor);
+  text-align: center;
+}

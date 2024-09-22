@@ -1,0 +1,91 @@
+interface ImageDataProps {
+  id: number;
+  imageDetailInputTitle: string,
+  placeholder: string,
+  data: string,
+  type: string,
+  required: boolean,
+}
+
+export const imageData: ImageDataProps[] = [
+  {
+    id: 0,
+    imageDetailInputTitle: 'Image Title',
+    placeholder: '', 
+    data: 'imageTitle',
+    type: 'text',
+    required: false,
+  },
+  {
+    id: 1,
+    imageDetailInputTitle: 'Location',
+    placeholder: '', 
+    data: 'location',
+    type: 'text',
+    required: false,
+  },
+  {
+    id: 2,
+    imageDetailInputTitle: 'Camera brand',
+    placeholder: 'Nikon', 
+    data: 'cameraBrand',
+    type: 'text',
+    required: false,
+  },
+  {
+    id: 3,
+    imageDetailInputTitle: 'Camera Body',
+    placeholder: 'FM2', 
+    data: 'cameraModel',
+    type: 'text',
+    required: false,
+  },
+  {
+    id: 4,
+    imageDetailInputTitle: 'Lens brand',
+    placeholder: 'Nikon', 
+    data: 'lensBrand',
+    type: 'text',
+    required: false,
+  },
+  {
+    id: 5,
+    imageDetailInputTitle: 'Lens model',
+    placeholder: 'Nikon', 
+    data: 'lensModel',
+    type: 'text',
+    required: false,
+  },
+  {
+    id: 6,
+    imageDetailInputTitle: 'Focal Length',
+    placeholder: '50mm', 
+    data: 'flength',
+    type: 'text',
+    required: false,
+  },
+  {
+    id: 7,
+    imageDetailInputTitle: 'Aperture',
+    placeholder: 'F/1.4', 
+    data: 'aperture',
+    type: 'text',
+    required: false,
+  },
+  {
+    id: 8,
+    imageDetailInputTitle: 'Film',
+    placeholder: 'Fujifilm Neopan 400', 
+    data: 'filmStock',
+    type: 'text',
+    required: false,
+  },
+  {
+    id: 9,
+    imageDetailInputTitle: 'Caption',
+    placeholder: '', 
+    data: 'caption',
+    type: 'text',
+    required: false,
+  }
+]
