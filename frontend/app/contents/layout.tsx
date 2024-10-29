@@ -42,7 +42,7 @@ export default function ContentsLayout({
 
   useEffect(() => {
     if (!isUserLoggedIn)
-      router.push('/signoff');
+      router.push('/');
   }, [isUserLoggedIn])
 
   return (

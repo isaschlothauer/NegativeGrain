@@ -10,7 +10,7 @@ let token: any;
 
 export const JWTGenerate = async (username: string) => {
 
-    // Cookie options
+    // Cookie options (with notes for myself)
     const cookieOptions: CookieOptionProps = {
       maxAge: Math.floor(Date.now() / 1000) + (60 * 60), // Expire after 1 hour. Session or persisitent login status. 
       httpOnly: true, // Cookie will not be exposed to client side code

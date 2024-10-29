@@ -48,15 +48,16 @@ export default function Header () {
     setIconToggleMenu(prevState => !prevState);
   }
 
-  const signOutRerender: () => void = () => {
+  const signOutRender: () => void = () => {
     setIsSignOffTriggerOn(true);
-    autoSignOff();
+    // console.log(isSignOffTriggerOn)
+    // autoSignOff();
   }
 
     // If not authorized, redirect to the landing page
     useEffect(() => {
       if (isSignOffTriggerOn == true) {
-        router.push('/signoff');
+        // router.push('/signoff');
         setIconToggleMenu(false);
       }
     })
@@ -67,7 +68,6 @@ export default function Header () {
           <Link href="/" className={styles.headerTitle}>
             <h1 className={`${styles.headerText} ${unica_one.className}`}>
               Negative Grain             
-
             </h1>
           </Link>
           <div className={styles.headerMenu}>
@@ -125,11 +125,14 @@ export default function Header () {
                 }
               })}
               {isUserLoggedIn? 
-                  <button className={styles.iconStyle}>
-                    <IconUser onClick={dropDownMenuTrigger} /> 
-                  </button>
-                :
-                <></>}
+              <>
+                <button className={styles.iconStyle}>
+                  <IconUser onClick={dropDownMenuTrigger} /> 
+                </button>
+        
+                </>
+              :
+              <></>}
             </ul>
           </nav>
         </div>
@@ -188,7 +191,7 @@ export default function Header () {
             }
           </ul>
           {isUserLoggedIn &&
-          <button className={styles.signOutButton} onClick={signOutRerender}>Sign Out</button>}
+          <button className={styles.signOutButton} onClick={signOutRender}>Sign Out</button>}
         </nav>
       </div>}
     </header>

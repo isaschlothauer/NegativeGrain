@@ -26,6 +26,8 @@ interface ImageDataProps {
 interface fileDataProps {
     fileName: File | null,
     imageData: string,
+    dateUploaded: Date;
+
 }
 
 interface ErrorProps {
@@ -45,7 +47,8 @@ export default function ContentUpload () {
   const { isUserLoggedIn } = isLoggedIn;
   const [ fileData, setFileData] = useState<fileDataProps>({
     fileName: null,
-    imageData: ''
+    imageData: '',
+    dateUploaded: new Date()
   })
   const [ fileDataError, setFileDataError] = useState<string | null>()
   const [ imageDetails, setImageDetails ] = useState<ImageDataProps>({
@@ -81,7 +84,7 @@ export default function ContentUpload () {
       setFileData((prevState) => ({
         ...prevState,
         fileName: null,
-        imageData: ''
+        imageData: '',
       }));
 
       // Clears file name 
@@ -164,7 +167,7 @@ export default function ContentUpload () {
         setPageRender(false);
 
         setTimeout(() => {
-          router.push('/signoff');
+          router.push('/');
         }, 2000)
       }
     }
@@ -272,7 +275,7 @@ export default function ContentUpload () {
               {/* Image data input fields */}
               {imageData.map((element: any) => {
                 return (
-                  element.id !== 8?
+                  element.id !== 9?
                   <li key={element.id}>
                     <div className={`${styles.inputItemList}`}>
                       <label htmlFor={element.data}>{element.imageDetailInputTitle}</label>

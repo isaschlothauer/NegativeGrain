@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ImageFeedArrayProps } from '../ImageDisplayPanel'
 import Image from 'next/image';
 import styles from './index.module.css';
@@ -18,20 +19,16 @@ export default function ImagePreviewPanel ({imageData} : {imageData: ImageFeedAr
         <Modal 
           opened={opened} 
           onClose={close} 
-          title={imageData.title}
+          // title={imageData.title}
           transitionProps={{ transition: 'fade', duration: 200 }}
           fullScreen={true}
           className={styles.modalStyle}
         >
           {imageModal(imageData)}
         </Modal>
-        <div 
-          className={styles.clickableThumbnail} 
-          role='button'
-          onClick={open}
-        >
+        <div className={styles.clickableThumbnail} role='button' onClick={open} >
           <Image
-            src={`${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_IMAGE_STORAGE}/thumbnails/${imageData.file_name}`}
+            src={`${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_IMAGE_STORAGE}/thumbnails/${process.env.NEXT_PUBLIC_THUMBNAIL}${imageData.file_name}`}
             sizes="100vw"
             style={{
               width: '100%',
@@ -40,6 +37,7 @@ export default function ImagePreviewPanel ({imageData} : {imageData: ImageFeedAr
             width={0}
             height={0}
             alt={imageData.caption}
+            loading="lazy"
           />
           <p className={styles.imagePanel}>{imageData.username}</p>
         </div>

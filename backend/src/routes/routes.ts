@@ -11,6 +11,7 @@ import LoginController from '../controllers/login.controller'
 import credentialVerificationController from '../controllers/credential.controller'
 import cookieController from '../controllers/cookie.controller'
 import ImageFeedController from '../controllers/image_feed.controller'
+import UpdateFavorite from '../controllers/update_favorite.controller'
 
 
 const api = Router()
@@ -21,8 +22,6 @@ const api = Router()
 .use('/upload', authVerification, uploadController)
 .use('/imageFeed', ImageFeedController)
 .use('/image_storage', express.static(path.join(__dirname, '../../src/image_storage')))
-.use('/favoriteTrigger', authVerification, (req, res)=> {
-  console.log("routes: ", req.body);
-})
-;
+.use('/favoriteUpdate', authVerification, UpdateFavorite)
+
 export default Router().use('/api', api);

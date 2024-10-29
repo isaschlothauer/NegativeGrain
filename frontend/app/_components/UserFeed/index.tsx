@@ -1,15 +1,15 @@
-import { imageFeedArrayProps } from '../ImageDisplayPanel'
+// import { imageFeedArrayProps } from '../ImageDisplayPanel'
 
-interface NewestImageFeedProps {
-  imageData: imageFeedArrayProps[];
-}
+// interface NewestImageFeedProps {
+//   imageData: imageFeedArrayProps[];
+// }
 
-export default function NewestFeed ({ imageData } : NewestImageFeedProps) {
+// export default function NewestFeed ({ imageData } : NewestImageFeedProps) {
 
-  console.log(imageData)
-  return (
-    <>
-      User Feed
-    </>
-  )
-}
+//   console.log(imageData)
+//   return (
+//     <>
+//       User Feed
+//     </>
+//   )
+// }

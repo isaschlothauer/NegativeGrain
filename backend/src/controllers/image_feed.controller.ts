@@ -1,7 +1,8 @@
 import { Router, Request, Response } from 'express';
 import { imageFeed } from '../services/image_feed'
-import path from 'path'
 import { NewestFeedProps } from '../../@types/express';
+import { jwtVerification } from '../services/jwt_services'
+
 
 const router = Router();
 
@@ -15,14 +16,14 @@ router.post('/', async (req: Request, res: Response) => {
     imageListData = await imageFeed(req.body)
 
     // Adding storageURL path
-    const updatedImageArray = imageListData.map(arrItem => ({
-      ...arrItem,
-      storage_url: imageStoragePath
-    }))
+    // const updatedImageArray = imageListData.map(arrItem => ({
+    //   ...arrItem,
+    //   storage_url: imageStoragePath
+    // }))
 
-    console.log(updatedImageArray);
-
-    return res.status(200).send({ access: true, message: ['Newest image feed data retrieval successful'], storage_path: updatedImageArray});
+    // console.log("img list data: ", imageListData)
+    // return res.status(200).send({ access: true, message: ['Newest image feed data retrieval successful'], storage_path: updatedImageArray});
+    return res.status(200).send({ access: true, message: ['Newest image feed data retrieval successful'], imageData: imageListData});
   }
   catch (error: unknown) {
     console.error(error);
