@@ -1,0 +1,26 @@
+# Backend port
+NEXT_PUBLIC_BACKEND_PORT=BACKEND_PORT
+
+# Frontend port
+NEXT_PUBLIC_F_PORT=FRONTEND_PORT
+
+NEXT_PUBLIC_URL=APPLICATION_URL
+
+# Account Registration path (change as needed)
+NEXT_PUBLIC_REGISTER="accountRegister"
+NEXT_PUBLIC_LOGIN="login"
+NEXT_PUBLIC_USERAUTH="userAuth"
+NEXT_PUBLIC_RECOVERY="recovery"
+NEXT_PUBLIC_VERIFY="onlineAuthentication"
+NEXT_PUBLIC_LOGINSTAT="loginStat"
+NEXT_PUBLIC_COOKIE="destroyCookie"
+NEXT_PUBLIC_UPLOAD="upload"
+NEXT_PUBLIC_IMAGE_FEED="imageFeed"
+NEXT_PUBLIC_IMAGE_STORAGE="image_storage"
+NEXT_PUBLIC_FAVORITE="favoriteUpdate"
+
+# Thumbnail prefix
+NEXT_PUBLIC_THUMBNAIL="tn-"
+
+# Image feed display limiter. Default and minimum is 6
+NEXT_PUBLIC_DISPLAY_MINIMUM = 12

@@ -9,48 +9,67 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 export const imageModal = (fileData: ImageFeedArrayProps) => {
-  const imageFileName: string = fileData['file_name'].replace('tn-', '');
+  const imageFileName: string = fileData.file_name;
 
   const router = useRouter();
 
   // Favorite icon trigger color
-  const [ favorite, setFavorite ] = useState<boolean>(false);
+  const [ favorite, setFavorite ] = useState<boolean | undefined>(fileData.is_favorite as unknown as boolean);
 
   // Date reformat
   const datePosted = DateFormatter(fileData.created_at as Date);
 
-  useEffect(() => {
-    const favTrigger = async () => {
+  // useEffect(() => {
+  //   const handleFavoriteUpdates = async () => {
+  // try {
 
-      try {
-        
-        await axios.post(`${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_FAVORITE}`,
-          { favorite },
-          {
-            withCredentials: true
-          }
-        )
-      }
-      catch (err: any) {
-        console.error("fTrigger error: ", err.response.status);
+  //     const response =  await axios.put(
+  //       `${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_FAVORITE}`, 
+  //       { favorite, imageFileName },
+  //       { withCredentials: true }
+  //     );
+  //     console.log('Favorite updated successfully:', await response);
+  //   }
+  //   catch (error: unknown) {
+  //     console.error('favorite update error: ', error);
+  //   }
 
-        if (err.response.status == 401) {
-          router.push('/')
-        }
+  //   }
+  //   handleFavoriteUpdates();
+  // }, [favorite])
+
+  // useEffect(() => {
+  //   console.log("favorite", favorite);
+  // }, [favorite])
+  const handleFavoriteUpdates:() => void = async () => {
+    // setFavorite((prevState) => !prevState);
+    !favorite? setFavorite(true) : setFavorite(false);
+    try {
+        const response =  await axios.put(
+          `${process.env.NEXT_PUBLIC_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/api/${process.env.NEXT_PUBLIC_FAVORITE}`, 
+          { favorite, imageFileName },
+          { withCredentials: true }
+        );
+        // console.log('Favorite updated successfully:', response);
       }
+      catch (error: unknown) {
+        console.error('favorite update error: ', error);
+      }
+
+    // console.log(favorite)
     }
 
-    favTrigger();
-  }, [favorite]);
+    console.log(favorite);
 
   const linkedIconTrigger = () => {
-    const imageSrc = favorite ? ClipboardCheck : Clipboard;  
+
+    // Clipboard icon selector
+    const imageSrc = favorite? ClipboardCheck : Clipboard;  
+    // let imageSrc: React.Component
     return (
-      <div 
-        role='button'
-        onClick={() => setFavorite((prevState) => !prevState)} 
+      <button 
         className={styles.favoriteIconContainer}
-        
+        onClick={handleFavoriteUpdates}
       >
         <Image
           src={imageSrc}
@@ -58,8 +77,9 @@ export const imageModal = (fileData: ImageFeedArrayProps) => {
           height={24}
           alt='Favorite image icon'
           className={styles.iconStyles}
+          loading="lazy"
         />
-      </div>
+      </button>
     );
   }
 
@@ -79,16 +99,46 @@ export const imageModal = (fileData: ImageFeedArrayProps) => {
             height={0}
             alt={fileData.caption}
             className={styles.modalImage}
+            loading="lazy"
           />
-          <div className={styles.modalImageDataContainer}>
-            <div className={styles.modalImageDetails}>
-              <div>{fileData.username}</div>
-              {linkedIconTrigger()}
+          <div className={styles.modalImageDataContainer}> 
+            <div>{fileData.username}</div>
+            <div>{fileData.caption} test test test test test test test test test test test test test test </div>
+            {/* <div>{fileData.}</div> */}
+
+
+
+            {/* <div className={styles.modalImageDetails}> */}
+              {/* <div>{fileData.username}</div> */}
+              {/* <div>{fileData.title}</div> */}
+              {/* {linkedIconTrigger()} */}
+              {/* <div className={styles.modalImageDate}>{datePosted}</div> */}
+            {/* </div> */}
+
+            {/* <div className={styles.imageData}> */}
+
+              {/* Column 1 */}
+              {/* <div> */}
+                {/* <div>{fileData.caption}</div> */}
+              {/* </div> */}
+
+              {/* Column 2 */}
+              {/* <div> */}
+                {/* <div>Photographer:</div> */}
+                  {/* {fileData.} */}
+
+                  {/* CREATE LIST OF IMAGE DETAILS */}
+              {/* </div> */}
             </div>
-          </div>
-          <div className={styles.modalImageDateContainer}>
-            <div className={styles.modalImageDate}>{datePosted}</div>
-          </div>
+
+
+
+
+            {/* <div>{fileData.username}</div> */}
+          {/* </div> */}
+          {/* <div className={styles.modalImageDateContainer}>
+            <div className={styles.modalImageDate}>{datePosted}</div>*/}
+          {/* </div>  */}
         </div>
       </div>
     </>

@@ -10,6 +10,7 @@ import ImagePreviewPanel from '../ImagePreviewPanel';
 import FetchFeedData from '../../_services/FetchFeedData';
 
 export interface ImageFeedArrayProps {
+  map(arg0: (item: any) => void): string;
   id: number;
   username: string,
   file_name: string,
@@ -24,7 +25,8 @@ export interface ImageFeedArrayProps {
   lens_focal_length: string,
   lens_aperture: string,
   film_stock: string,
-  caption: string
+  caption: string,
+  is_favorite: number
 }
 
 export default function ImageDisplayPanel() {
@@ -38,44 +40,35 @@ export default function ImageDisplayPanel() {
   // Keeps image feed rendering to a certain number
   let panelFeedLimiterRef = useRef(Number(process.env.NEXT_PUBLIC_DISPLAY_MINIMUM as string));
 
-  // console.log("check", panelFeedLimiterRef.current)
-
   // panelFeedLimiterRef.current = panelFeedLimiterRef.current + 12;
-
-  // console.log(panelFeedLimiterRef.current)
-  // console.log(panelFeedLimiterRef);
 
   // panelFeedLimitterRef.current = panelFeedLimitterRef.current + 6
   
 
 
   // panelFeedLimiterRef.current = panelFeedLimiterRef.current + 6
-  // console.log(panelFeedLimiterRef);
-
-
-  // console.log(parseInt(process.env.NEXT_PUBLIC_DISPLAY_MINIMUM as string))
-  // console.log(typeof parseInt(process.env.NEXT_PUBLIC_DISPLAY_MINIMUM ))
 
   useEffect(() => {
     const imageDataFetch = async () => {
       const imageData = await FetchFeedData(feedMode);
-      setImageFeedArray(imageData.data.storage_path);
+      setImageFeedArray(imageData.data.imageData);
     }
     imageDataFetch()
-  }, [feedMode])
+  }, [feedMode]);
+
+  console.log("image feed data: ", imageFeedArray);
 
   const imageFeedPanel = (imageFeedArray: ImageFeedArrayProps[]) => {
-
     return (
       <>
         {imageFeedArray.map((item) => (
+          // Image thumbnail & modal component
           <ImagePreviewPanel key={item.id} imageData={item} />
         ))}
       </>
     )
   }
 
-  console.log(imageFeedArray)
   return (
     <section>
       <div className={styles.feedMode}>

@@ -95,7 +95,6 @@ export interface NewestFeedProps extends RowDataPacket {
     created_at: Date,
     title: string,
     location: string;
-    storage_url?: string,
     camera_brand: string,
     camera_model: string,
     lens_brand: string,
@@ -103,5 +102,11 @@ export interface NewestFeedProps extends RowDataPacket {
     lens_focal_length: string,
     lens_aperture: string,
     film_stock: string,
-    caption: string
+    caption: string,
+    is_favorite: boolean
+  }
+
+  export interface ImageFavoriteProps extends RowDataPacket{
+    imageId: number;
+    userId: number;
   }
